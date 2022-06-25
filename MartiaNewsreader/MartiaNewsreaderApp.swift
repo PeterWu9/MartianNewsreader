@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct MartiaNewsreaderApp: App {
+    @StateObject var newsFetcher = NewsFetcher()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ArticlesListView()
+                .environmentObject(newsFetcher)
         }
     }
 }
