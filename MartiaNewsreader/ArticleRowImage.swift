@@ -18,9 +18,8 @@ struct ArticleRowImage: View {
                 if let image = phase.image {
                     image // Displays the loaded image.
                         .resizable()
-                    // FIXME: image "fill" doesn't fill
                         .aspectRatio(contentMode: .fill)
-                        .frame(width: (width * 0.90).rounded(), height: height)
+                        .frame(width: width, height: height)
                         .clipped()
                         .background(Color.gray)
                 } else {
