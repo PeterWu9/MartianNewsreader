@@ -16,7 +16,8 @@ struct ArticleRow: View {
                 AsyncImage(url: url) { phase in
                     if let image = phase.image {
                         image // Displays the loaded image.
-                            .resizable()
+//                            .resizable()
+                        // FIXME: image "fill" doesn't fill
                             .aspectRatio(contentMode: .fill)
                         //                            .padding()
                             .frame(width: 300, height: 200)

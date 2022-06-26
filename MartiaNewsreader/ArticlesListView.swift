@@ -11,30 +11,33 @@ struct ArticlesListView: View {
     
     @EnvironmentObject var articlesFetcher: ArticlesFetcher
     @State var isLoadingArticles: Bool = false
-
+    
     var body: some View {
-        VStack {
-            if isLoadingArticles {
-                ProgressView()
-                    .scaleEffect(.init(3.0), anchor: .center)
-                    .progressViewStyle(CircularProgressViewStyle(tint: .pink))
-            } else {
-                List {
-                    ForEach(articlesFetcher.articles) { article in
-                        ArticleRow(article: article)
-                            .padding([.bottom])
+        NavigationView {
+            VStack {
+                if isLoadingArticles {
+                    ProgressView()
+                        .scaleEffect(.init(3.0), anchor: .center)
+                        .progressViewStyle(CircularProgressViewStyle(tint: .pink))
+                } else {
+                    List {
+                        ForEach(articlesFetcher.articles) { article in
+                            ArticleRow(article: article)
+                                .padding([.bottom])
+                        }
                     }
+                    .navigationTitle("Martian News")
                 }
             }
-        }
-        .task {
-            isLoadingArticles = true
-            do {
-                try await articlesFetcher.fetchArticles()
-                isLoadingArticles = false
-            } catch {
-                // TODO: Show error view
-                isLoadingArticles = false
+            .task {
+                isLoadingArticles = true
+                do {
+                    try await articlesFetcher.fetchArticles()
+                    isLoadingArticles = false
+                } catch {
+                    // TODO: Show error view
+                    isLoadingArticles = false
+                }
             }
         }
     }
@@ -42,8 +45,14 @@ struct ArticlesListView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ArticlesListView()
-            .environmentObject(ArticlesFetcher())
+        Group {
+            ArticlesListView()
+                .environmentObject(ArticlesFetcher())
+            .previewDevice(PreviewDevice(rawValue: "iPhone 13 Pro Max"))
+            ArticlesListView()
+                .environmentObject(ArticlesFetcher())
+                .previewDevice(PreviewDevice(rawValue: "iPhone SE (3rd generation)"))
+        }
     }
 }
 
