@@ -12,31 +12,34 @@ struct ArticlesListView: View {
     @EnvironmentObject var articlesFetcher: ArticlesFetcher
     @State var isLoadingArticles: Bool = false
     
+    let scale: Double = 3.0
+    
     var body: some View {
-        NavigationView {
-            VStack {
-                if isLoadingArticles {
-                    ProgressView()
-                        .scaleEffect(.init(3.0), anchor: .center)
-                        .progressViewStyle(CircularProgressViewStyle(tint: .pink))
-                } else {
-                    List {
+        GeometryReader { geometry in
+            NavigationView {
+                ScrollView {
+                    if isLoadingArticles {
+                        ProgressView()
+                            .scaleEffect(.init(scale), anchor: .center)
+                            .progressViewStyle(CircularProgressViewStyle(tint: .pink))
+                    } else {
                         ForEach(articlesFetcher.articles) { article in
-                            ArticleRow(article: article)
+                            ArticleRow(article: article, width: geometry.size.width)
                                 .padding([.bottom])
                         }
+                        .navigationTitle("Martian News")
+//                        .background(Color.pink)
                     }
-                    .navigationTitle("Martian News")
                 }
-            }
-            .task {
-                isLoadingArticles = true
-                do {
-                    try await articlesFetcher.fetchArticles()
-                    isLoadingArticles = false
-                } catch {
-                    // TODO: Show error view
-                    isLoadingArticles = false
+                .task {
+                    isLoadingArticles = true
+                    do {
+                        try await articlesFetcher.fetchArticles()
+                        isLoadingArticles = false
+                    } catch {
+                        // TODO: Show error view
+                        isLoadingArticles = false
+                    }
                 }
             }
         }

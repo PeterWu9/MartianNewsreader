@@ -46,5 +46,4 @@ final class NetworkManager {
 
 enum NetworkError: Error, LocalizedError {
     case invalidNetworkResponse
-    
 }

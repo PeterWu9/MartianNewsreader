@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F90A2E6C286843FD00DF0405 /* ArticleRowImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90A2E6B286843FB00DF0405 /* ArticleRowImage.swift */; };
 		F92F87592867AE77008A681E /* MartiaNewsreaderApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F92F87582867AE77008A681E /* MartiaNewsreaderApp.swift */; };
 		F92F875B2867AE77008A681E /* ArticlesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F92F875A2867AE77008A681E /* ArticlesListView.swift */; };
 		F92F875D2867AE7B008A681E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F92F875C2867AE7B008A681E /* Assets.xcassets */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F90A2E6B286843FB00DF0405 /* ArticleRowImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleRowImage.swift; sourceTree = "<group>"; };
 		F92F87552867AE77008A681E /* MartiaNewsreader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MartiaNewsreader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F92F87582867AE77008A681E /* MartiaNewsreaderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MartiaNewsreaderApp.swift; sourceTree = "<group>"; };
 		F92F875A2867AE77008A681E /* ArticlesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticlesListView.swift; sourceTree = "<group>"; };
@@ -60,11 +62,12 @@
 			isa = PBXGroup;
 			children = (
 				F92F87692867B18E008A681E /* NetworkManager.swift */,
+				F92F876D2867B6B8008A681E /* ArticlesFetcher.swift */,
 				F92F87582867AE77008A681E /* MartiaNewsreaderApp.swift */,
 				F92F87682867B163008A681E /* Model */,
 				F92F875A2867AE77008A681E /* ArticlesListView.swift */,
 				F93BEB872867C262005ACB2E /* ArticleRow.swift */,
-				F92F876D2867B6B8008A681E /* ArticlesFetcher.swift */,
+				F90A2E6B286843FB00DF0405 /* ArticleRowImage.swift */,
 				F92F875C2867AE7B008A681E /* Assets.xcassets */,
 				F92F875E2867AE7B008A681E /* Preview Content */,
 			);
@@ -163,6 +166,7 @@
 				F92F87672867B0C9008A681E /* Article.swift in Sources */,
 				F92F87592867AE77008A681E /* MartiaNewsreaderApp.swift in Sources */,
 				F93BEB882867C262005ACB2E /* ArticleRow.swift in Sources */,
+				F90A2E6C286843FD00DF0405 /* ArticleRowImage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
