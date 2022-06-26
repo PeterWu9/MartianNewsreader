@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ArticlesListView: View {
     
-    @EnvironmentObject var newsFetcher: NewsFetcher
+    @EnvironmentObject var articlesFetcher: ArticlesFetcher
     @State var isLoadingArticles: Bool = false
 
     var body: some View {
@@ -20,12 +20,9 @@ struct ArticlesListView: View {
                     .progressViewStyle(CircularProgressViewStyle(tint: .pink))
             } else {
                 List {
-                    ForEach(newsFetcher.articles) { article in
-                        VStack {
-                            Text("Image View")
-                            Text("Title")
-                            Text(article.title)
-                        }
+                    ForEach(articlesFetcher.articles) { article in
+                        ArticleRow(article: article)
+                            .padding([.bottom])
                     }
                 }
             }
@@ -33,7 +30,7 @@ struct ArticlesListView: View {
         .task {
             isLoadingArticles = true
             do {
-                try await newsFetcher.fetchArticles()
+                try await articlesFetcher.fetchArticles()
                 isLoadingArticles = false
             } catch {
                 // TODO: Show error view
@@ -46,6 +43,7 @@ struct ArticlesListView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ArticlesListView()
+            .environmentObject(ArticlesFetcher())
     }
 }
 

@@ -8,7 +8,7 @@
 import Foundation
 
 @MainActor
-final class NewsFetcher: ObservableObject {
+final class ArticlesFetcher: ObservableObject {
     
     @Published private(set) var articles: Articles = []
     
