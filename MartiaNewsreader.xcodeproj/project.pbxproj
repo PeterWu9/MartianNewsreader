@@ -16,8 +16,9 @@
 		F92F876A2867B18E008A681E /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F92F87692867B18E008A681E /* NetworkManager.swift */; };
 		F92F876E2867B6B9008A681E /* ArticlesFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = F92F876D2867B6B8008A681E /* ArticlesFetcher.swift */; };
 		F93BEB882867C262005ACB2E /* ArticleRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93BEB872867C262005ACB2E /* ArticleRow.swift */; };
-		F962FD18286A31A6003CF115 /* StringParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = F962FD17286A31A6003CF115 /* StringParser.swift */; };
 		F962FD1E286A538E003CF115 /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F962FD1D286A538E003CF115 /* TitleView.swift */; };
+		F962FD21286A6895003CF115 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F962FD20286A6895003CF115 /* String+.swift */; };
+		F962FD23286A68AE003CF115 /* Character+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F962FD22286A68AE003CF115 /* Character+.swift */; };
 		F9953A2F2868DDF9003D0062 /* ArticleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9953A2E2868DDF9003D0062 /* ArticleView.swift */; };
 /* End PBXBuildFile section */
 
@@ -32,8 +33,9 @@
 		F92F87692867B18E008A681E /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		F92F876D2867B6B8008A681E /* ArticlesFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticlesFetcher.swift; sourceTree = "<group>"; };
 		F93BEB872867C262005ACB2E /* ArticleRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleRow.swift; sourceTree = "<group>"; };
-		F962FD17286A31A6003CF115 /* StringParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringParser.swift; sourceTree = "<group>"; };
 		F962FD1D286A538E003CF115 /* TitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
+		F962FD20286A6895003CF115 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
+		F962FD22286A68AE003CF115 /* Character+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Character+.swift"; sourceTree = "<group>"; };
 		F9953A2E2868DDF9003D0062 /* ArticleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -67,6 +69,7 @@
 		F92F87572867AE77008A681E /* MartiaNewsreader */ = {
 			isa = PBXGroup;
 			children = (
+				F962FD1F286A687E003CF115 /* Helper */,
 				F92F87582867AE77008A681E /* MartiaNewsreaderApp.swift */,
 				F962FD1B286A34D0003CF115 /* API */,
 				F962FD1A286A34BF003CF115 /* ViewModel */,
@@ -94,19 +97,10 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		F962FD19286A31B7003CF115 /* Helper */ = {
-			isa = PBXGroup;
-			children = (
-				F962FD17286A31A6003CF115 /* StringParser.swift */,
-			);
-			path = Helper;
-			sourceTree = "<group>";
-		};
 		F962FD1A286A34BF003CF115 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
 				F92F876D2867B6B8008A681E /* ArticlesFetcher.swift */,
-				F962FD19286A31B7003CF115 /* Helper */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -126,6 +120,15 @@
 				F9953A2D2868DDE3003D0062 /* ListView */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		F962FD1F286A687E003CF115 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				F962FD20286A6895003CF115 /* String+.swift */,
+				F962FD22286A68AE003CF115 /* Character+.swift */,
+			);
+			path = Helper;
 			sourceTree = "<group>";
 		};
 		F9953A2D2868DDE3003D0062 /* ListView */ = {
@@ -209,10 +212,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F962FD23286A68AE003CF115 /* Character+.swift in Sources */,
 				F92F876A2867B18E008A681E /* NetworkManager.swift in Sources */,
 				F92F876E2867B6B9008A681E /* ArticlesFetcher.swift in Sources */,
+				F962FD21286A6895003CF115 /* String+.swift in Sources */,
 				F92F875B2867AE77008A681E /* ArticlesListView.swift in Sources */,
-				F962FD18286A31A6003CF115 /* StringParser.swift in Sources */,
 				F9953A2F2868DDF9003D0062 /* ArticleView.swift in Sources */,
 				F92F87672867B0C9008A681E /* Article.swift in Sources */,
 				F92F87592867AE77008A681E /* MartiaNewsreaderApp.swift in Sources */,
