@@ -40,7 +40,16 @@ struct ArticlesListView: View {
                             )
                         }
                     }
-                    .navigationTitle("Martian News")
+                    .navigationBarTitleDisplayMode(.inline)
+                    .toolbar {
+                        ToolbarItem(placement: .navigationBarLeading) {
+                            HStack {
+                                Spacer()
+                                    .frame(width: padding)
+                                TitleView()
+                            }
+                        }
+                    }
                     .listStyle(.plain)
                 }
             }
