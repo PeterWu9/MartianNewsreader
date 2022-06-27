@@ -34,7 +34,7 @@ extension Article {
 
 extension Article {
     static var sample: Article {
-        .init(title: "Curiosity turns 100 today", images: [ArticleImage.sample], body: "The NASA Mars rover that was successfully dispatched to Mars in 2012 has turned 100 today.  Curiosity's mission was to explore Martian climate and geology, and to determine if Mars could ever support life.  Curiosity was the first rover to make the significant discovery of...")
+        .init(title: "Curiosity turns 100 today", images: [ArticleImage.sample], body: "The NASA Mars rover that was successfully dispatched to Mars in 2012 has turned 100 today.  Curiosity's mission was to explore Martian climate and geology, and to determine if Mars could ever support life.  Curiosity was the first rover to make the significant discovery of")
     }
 }
 

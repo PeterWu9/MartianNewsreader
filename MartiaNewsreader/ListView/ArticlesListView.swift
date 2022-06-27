@@ -12,8 +12,8 @@ struct ArticlesListView: View {
     @EnvironmentObject var articlesFetcher: ArticlesFetcher
     @State var isLoadingArticles: Bool = false
     
-    let scale: Double = 3.0
-    let padding: Double = 24.0
+    private let scale: Double = 3.0
+    private let padding: Double = 24.0
     
     var body: some View {
         GeometryReader { geometry in
@@ -29,6 +29,14 @@ struct ArticlesListView: View {
                                 article: article,
                                 width: geometry.size.width * 0.9,
                                 padding: padding
+                            )
+                            // Enables navigation to article detail view but hides the disclosure button
+                            .overlay(
+                                NavigationLink(
+                                    destination: { ArticleView(article: article) },
+                                    label: { EmptyView() }
+                                )
+                                .opacity(0)
                             )
                         }
                     }
