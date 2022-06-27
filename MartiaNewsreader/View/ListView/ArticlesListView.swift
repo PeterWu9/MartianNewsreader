@@ -27,9 +27,10 @@ struct ArticlesListView: View {
                         ForEach(articlesFetcher.articles) { article in
                             ArticleRow(
                                 article: article,
-                                width: geometry.size.width * 0.9,
+                                width: geometry.size.width,
                                 padding: padding
                             )
+                            .listRowInsets(EdgeInsets())
                             // Enables navigation to article detail view but hides the disclosure button
                             .overlay(
                                 NavigationLink(
@@ -43,11 +44,7 @@ struct ArticlesListView: View {
                     .navigationBarTitleDisplayMode(.inline)
                     .toolbar {
                         ToolbarItem(placement: .navigationBarLeading) {
-                            HStack {
-                                Spacer()
-                                    .frame(width: padding)
-                                TitleView()
-                            }
+                            TitleView()
                         }
                     }
                     .listStyle(.plain)
