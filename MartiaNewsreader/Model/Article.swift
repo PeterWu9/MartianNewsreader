@@ -1,26 +1,17 @@
 import Foundation
 
-struct Article: Codable {
+struct Article: Codable, Hashable, Identifiable {
+    let id = UUID()
     let title: String
     let images: [ArticleImage]
     let body: String
-}
-
-extension Article: Identifiable, Hashable {
-    static func == (lhs: Article, rhs: Article) -> Bool {
-        lhs.id == rhs.id
-    }
     
-    // TODO: Investigate ways to create stable identity out of server object without a server-generated ID
-    var id: String {
-        title + body
-    }
-    
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(title)
+    private enum CodingKeys : String, CodingKey {
+        case title, images, body
     }
 }
 
+// MARK: Convenience Accessor/Sample
 extension Article {
     var topImage: ArticleImage? {
         images.first { $0.topImage }
@@ -41,8 +32,13 @@ extension Article {
     }
 }
 
+// MARK: Protocols Conformance
+extension Article: ArticleFormat {}
+
+
 // MARK: - Image
-struct ArticleImage: Codable {
+struct ArticleImage: Codable, Hashable, Identifiable {
+    let id: UUID = UUID()
     let topImage: Bool
     let urlString: String
     let width, height: Int
