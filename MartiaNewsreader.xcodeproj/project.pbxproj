@@ -82,8 +82,7 @@
 				F92F87682867B163008A681E /* Model */,
 				F962FD1C286A3C65003CF115 /* View */,
 				F92F875E2867AE7B008A681E /* Preview Content */,
-				F94EF359286BB45B0087992F /* Info.plist */,
-				F92F875C2867AE7B008A681E /* Assets.xcassets */,
+				F9627CD7286BC1E8002688D7 /* SupportingFiles */,
 			);
 			path = MartiaNewsreader;
 			sourceTree = "<group>";
@@ -110,6 +109,15 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F9627CD7286BC1E8002688D7 /* SupportingFiles */ = {
+			isa = PBXGroup;
+			children = (
+				F94EF359286BB45B0087992F /* Info.plist */,
+				F92F875C2867AE7B008A681E /* Assets.xcassets */,
+			);
+			path = SupportingFiles;
 			sourceTree = "<group>";
 		};
 		F962FD1A286A34BF003CF115 /* ViewModel */ = {
@@ -371,7 +379,7 @@
 				DEVELOPMENT_TEAM = GG58NB3258;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = MartiaNewsreader/Info.plist;
+				INFOPLIST_FILE = MartiaNewsreader/SupportingFiles/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -401,7 +409,7 @@
 				DEVELOPMENT_TEAM = GG58NB3258;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = MartiaNewsreader/Info.plist;
+				INFOPLIST_FILE = MartiaNewsreader/SupportingFiles/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
