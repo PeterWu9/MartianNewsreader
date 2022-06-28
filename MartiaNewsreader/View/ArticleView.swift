@@ -19,7 +19,7 @@ struct ArticleView: View {
                         .font(Font.system(.title, design: .serif))
                         .padding([.bottom])
 
-                    if let url = article.images.first?.url {
+                    if let url = article.topImage?.url {
                         AsyncImage(url: url) { phase in
                             if let image = phase.image {
                                 image // Displays the loaded image.

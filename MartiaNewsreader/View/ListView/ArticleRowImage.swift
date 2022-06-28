@@ -13,7 +13,7 @@ struct ArticleRowImage: View {
     let height: Double = 200
     
     var body: some View {
-        if let url = article.images.first?.url {
+        if let url = article.topImage?.url {
             AsyncImage(url: url) { phase in
                 if let image = phase.image {
                     image // Displays the loaded image.

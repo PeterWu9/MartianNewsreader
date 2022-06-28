@@ -56,10 +56,10 @@ extension ArticlesFetcher {
                     
                 } else {
                     /* If last sentence is not a title sentence, then the last paragraph needs to be checked for proper sentence termination.
-                            - If the last paragraph ended properly, then it's safe to combine with the next sentence, and continue with the next iteration.
-                            - If the last paragraph did not end properly, then inspect the next sentence's status, with two possible outcomes:
-                                - 1. the next sentence is a title sentence. In this case, the previous sentence was indeed a sentence, with the terminating character missing. Fix the previous sentence by appending the default terminating character "." to the accumulated paragraph, and combine with the title sentence with paragraph separator
-                                - 2. the next sentence is not a title sentence.  In this case, the next sentence is a continuation of the previous sentence, and the two is to be combined with a space separator.
+                        - If the last paragraph ended properly, then it's safe to combine with the next sentence, and continue with the next iteration.
+                        - If the last paragraph did not end properly, then inspect the next sentence's status, with two possible outcomes:
+                            - 1. the next sentence is a title sentence. In this case, the previous sentence was indeed a sentence, with the terminating character missing. Fix the previous sentence by appending the default terminating character "." to the accumulated paragraph, and combine with the title sentence with paragraph separator
+                            - 2. the next sentence is not a title sentence.  In this case, the next sentence is a continuation of the previous sentence, and the two is to be combined with a space separator.
                      */
                     guard let lastChar = previousParagraphs.last else {
                         // Accumulated string is empty, which indicates we're in the initial iteration. Move on to next iteration
