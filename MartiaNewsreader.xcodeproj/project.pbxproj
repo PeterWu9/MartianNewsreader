@@ -19,6 +19,7 @@
 		F94EF34F286B88E60087992F /* Articles.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94EF34E286B88E60087992F /* Articles.swift */; };
 		F94EF357286BB3AE0087992F /* ProofReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94EF356286BB3AE0087992F /* ProofReader.swift */; };
 		F94EF35C286BB4630087992F /* ProofReadingLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = F94EF35B286BB4630087992F /* ProofReadingLibrary */; };
+		F9627CD9286BC77D002688D7 /* ArticleService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9627CD8286BC77D002688D7 /* ArticleService.swift */; };
 		F962FD1E286A538E003CF115 /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F962FD1D286A538E003CF115 /* TitleView.swift */; };
 		F9953A2F2868DDF9003D0062 /* ArticleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9953A2E2868DDF9003D0062 /* ArticleView.swift */; };
 /* End PBXBuildFile section */
@@ -38,6 +39,7 @@
 		F94EF356286BB3AE0087992F /* ProofReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProofReader.swift; sourceTree = "<group>"; };
 		F94EF358286BB4430087992F /* ProofReadingLibrary */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = ProofReadingLibrary; path = MartiaNewsreader/ProofReadingLibrary; sourceTree = "<group>"; };
 		F94EF359286BB45B0087992F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F9627CD8286BC77D002688D7 /* ArticleService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleService.swift; sourceTree = "<group>"; };
 		F962FD1D286A538E003CF115 /* TitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
 		F9953A2E2868DDF9003D0062 /* ArticleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -76,7 +78,7 @@
 			isa = PBXGroup;
 			children = (
 				F92F87582867AE77008A681E /* MartiaNewsreaderApp.swift */,
-				F962FD1F286A687E003CF115 /* Helper */,
+				F9627CDA286BCA93002688D7 /* Services */,
 				F962FD1B286A34D0003CF115 /* API */,
 				F962FD1A286A34BF003CF115 /* ViewModel */,
 				F92F87682867B163008A681E /* Model */,
@@ -120,6 +122,14 @@
 			path = SupportingFiles;
 			sourceTree = "<group>";
 		};
+		F9627CDA286BCA93002688D7 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				F94EF356286BB3AE0087992F /* ProofReader.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		F962FD1A286A34BF003CF115 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -132,6 +142,7 @@
 			isa = PBXGroup;
 			children = (
 				F92F87692867B18E008A681E /* NetworkManager.swift */,
+				F9627CD8286BC77D002688D7 /* ArticleService.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -143,14 +154,6 @@
 				F9953A2D2868DDE3003D0062 /* ListView */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		F962FD1F286A687E003CF115 /* Helper */ = {
-			isa = PBXGroup;
-			children = (
-				F94EF356286BB3AE0087992F /* ProofReader.swift */,
-			);
-			path = Helper;
 			sourceTree = "<group>";
 		};
 		F9953A2D2868DDE3003D0062 /* ListView */ = {
@@ -237,6 +240,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F9627CD9286BC77D002688D7 /* ArticleService.swift in Sources */,
 				F92F876A2867B18E008A681E /* NetworkManager.swift in Sources */,
 				F92F876E2867B6B9008A681E /* ArticlesFetcher.swift in Sources */,
 				F94EF34F286B88E60087992F /* Articles.swift in Sources */,

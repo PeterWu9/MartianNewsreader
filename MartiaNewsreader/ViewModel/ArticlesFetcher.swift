@@ -8,48 +8,49 @@
 import Foundation
 
 // MARK: Dependencies
-protocol ArticleFormat {
-    var body: String { get }
-}
-
 protocol ArticleProofReader {
     // This function may be an asynchronous operation (services performed over network, database..etc)
+    init()
     func proofRead(_ article: Article) async throws -> String
+}
+
+protocol ArticleServiceProvider {
+    func fetchArticles() async throws -> Articles
 }
 
 // MARK: ViewModel
 @MainActor
-final class ArticlesFetcher<ProofReader: ArticleProofReader>: ObservableObject {
+final class ArticlesFetcher<ProofReader: ArticleProofReader, ArticleService: ArticleServiceProvider>: ObservableObject {
     
     @Published private(set) var articles: Articles = []
     
     private var reader: ProofReader
+    private var articleService: ArticleService
     
-    init(reader: ProofReader) {
+    init(reader: ProofReader, articleService: ArticleService) {
         self.reader = reader
+        self.articleService = articleService
     }
         
     func fetchArticles() async throws {
         
-        let fetchedArticles = try await NetworkManager.shared.getArticles()
+        let fetchedArticles = try await articleService.fetchArticles()
         
         articles = try await withThrowingTaskGroup(of: Article.self) { group in
             for article in fetchedArticles {
                 group.addTask {
                     // Allows strong self capture because self won't outlive the scope of throwing task group closure
-                    try await self.checkCarriageAndSentenceFragment(for: article)
+                    try await self.proofRead(article)
                 }
             }
             
-            var articles = Articles()
-            for try await article in group {
-                articles.append(article)
+            return try await group.reduce(into: Articles()) { articles, loadedArticle in
+                articles.append(loadedArticle)
             }
-            return articles
         }
     }
     
-    func checkCarriageAndSentenceFragment(for article: Article) async throws -> Article {
+    func proofRead(_ article: Article) async throws -> Article {
         return try await Article(
             title: article.title,
             images: article.images,

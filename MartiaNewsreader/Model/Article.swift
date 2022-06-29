@@ -32,9 +32,6 @@ extension Article {
     }
 }
 
-// MARK: Protocols Conformance
-extension Article: ArticleFormat {}
-
 
 // MARK: - Image
 struct ArticleImage: Codable, Hashable, Identifiable {

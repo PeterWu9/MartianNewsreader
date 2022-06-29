@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ArticlesListView: View {
     
-    @EnvironmentObject var articlesFetcher: ArticlesFetcher<ProofReader>
+    @EnvironmentObject var articlesFetcher: ArticlesFetcher<ProofReader, ArticleService>
     @State var isLoadingArticles: Bool = false
     
     private let scale: Double = 3.0
@@ -69,10 +69,10 @@ struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             ArticlesListView()
-                .environmentObject(ArticlesFetcher(reader: ProofReader()))
+                .environmentObject(ArticlesFetcher(reader: ProofReader(), articleService: ArticleService()))
                 .previewDevice(PreviewDevice(rawValue: "iPhone 13 Pro Max"))
             ArticlesListView()
-                .environmentObject(ArticlesFetcher(reader: ProofReader()))
+                .environmentObject(ArticlesFetcher(reader: ProofReader(), articleService: ArticleService()))
                 .previewDevice(PreviewDevice(rawValue: "iPhone SE (3rd generation)"))
         }
     }
