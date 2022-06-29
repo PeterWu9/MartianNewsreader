@@ -31,6 +31,8 @@ struct ArticlesListView: View {
                         .progressViewStyle(CircularProgressViewStyle(tint: .pink))
                 case .completeLoading:
                     List {
+                        CurrentDateView()
+                            .listRowSeparator(.hidden)
                         ForEach(articlesFetcher.articles) { article in
                             ArticleRow(
                                 article: article,
