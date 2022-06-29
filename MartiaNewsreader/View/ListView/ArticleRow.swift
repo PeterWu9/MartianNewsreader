@@ -15,13 +15,13 @@ struct ArticleRow: View {
     var body: some View {
         VStack{
             ArticleRowImage(article: article, width: width)
-
+            
             Text(article.title)
-                .multilineTextAlignment(.leading)
-                .lineLimit(nil)
-                .fixedSize(horizontal: false, vertical: true)
                 .font(Font.system(.title, design: .serif))
+                .frame(width: width, alignment: .leading)
+                .multilineTextAlignment(.leading)
                 .padding([.bottom])
+                .offset(x: 8)
         }
         .padding([.top])
     }
