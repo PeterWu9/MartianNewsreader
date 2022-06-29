@@ -13,7 +13,7 @@
 		F92F875D2867AE7B008A681E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F92F875C2867AE7B008A681E /* Assets.xcassets */; };
 		F92F87602867AE7B008A681E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F92F875F2867AE7B008A681E /* Preview Assets.xcassets */; };
 		F92F87672867B0C9008A681E /* Article.swift in Sources */ = {isa = PBXBuildFile; fileRef = F92F87662867B0C9008A681E /* Article.swift */; };
-		F92F876E2867B6B9008A681E /* ArticlesFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = F92F876D2867B6B8008A681E /* ArticlesFetcher.swift */; };
+		F92F876E2867B6B9008A681E /* ArticleSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F92F876D2867B6B8008A681E /* ArticleSource.swift */; };
 		F93BEB882867C262005ACB2E /* ArticleRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93BEB872867C262005ACB2E /* ArticleRow.swift */; };
 		F94EF34F286B88E60087992F /* Articles.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94EF34E286B88E60087992F /* Articles.swift */; };
 		F94EF357286BB3AE0087992F /* ProofReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94EF356286BB3AE0087992F /* ProofReader.swift */; };
@@ -32,7 +32,7 @@
 		F92F875C2867AE7B008A681E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F92F875F2867AE7B008A681E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		F92F87662867B0C9008A681E /* Article.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Article.swift; sourceTree = "<group>"; };
-		F92F876D2867B6B8008A681E /* ArticlesFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticlesFetcher.swift; sourceTree = "<group>"; };
+		F92F876D2867B6B8008A681E /* ArticleSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleSource.swift; sourceTree = "<group>"; };
 		F93BEB872867C262005ACB2E /* ArticleRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleRow.swift; sourceTree = "<group>"; };
 		F94EF34E286B88E60087992F /* Articles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Articles.swift; sourceTree = "<group>"; };
 		F94EF356286BB3AE0087992F /* ProofReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProofReader.swift; sourceTree = "<group>"; };
@@ -81,7 +81,6 @@
 			children = (
 				F92F87582867AE77008A681E /* MartiaNewsreaderApp.swift */,
 				F9627CDA286BCA93002688D7 /* Services */,
-				F962FD1B286A34D0003CF115 /* API */,
 				F962FD1A286A34BF003CF115 /* ViewModel */,
 				F92F87682867B163008A681E /* Model */,
 				F962FD1C286A3C65003CF115 /* View */,
@@ -128,6 +127,7 @@
 			isa = PBXGroup;
 			children = (
 				F94EF356286BB3AE0087992F /* ProofReader.swift */,
+				F9627CD8286BC77D002688D7 /* ArticleService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -135,17 +135,9 @@
 		F962FD1A286A34BF003CF115 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				F92F876D2867B6B8008A681E /* ArticlesFetcher.swift */,
+				F92F876D2867B6B8008A681E /* ArticleSource.swift */,
 			);
 			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		F962FD1B286A34D0003CF115 /* API */ = {
-			isa = PBXGroup;
-			children = (
-				F9627CD8286BC77D002688D7 /* ArticleService.swift */,
-			);
-			path = API;
 			sourceTree = "<group>";
 		};
 		F962FD1C286A3C65003CF115 /* View */ = {
@@ -243,7 +235,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F9627CD9286BC77D002688D7 /* ArticleService.swift in Sources */,
-				F92F876E2867B6B9008A681E /* ArticlesFetcher.swift in Sources */,
+				F92F876E2867B6B9008A681E /* ArticleSource.swift in Sources */,
 				F94EF34F286B88E60087992F /* Articles.swift in Sources */,
 				F92F875B2867AE77008A681E /* ArticlesListView.swift in Sources */,
 				F94EF357286BB3AE0087992F /* ProofReader.swift in Sources */,

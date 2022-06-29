@@ -9,7 +9,7 @@ import SwiftUI
 
 @main
 struct MartiaNewsreaderApp: App {
-    @StateObject var newsFetcher = ArticlesFetcher(
+    @StateObject var newsFetcher = ArticleSource(
         reader: ProofReader(),
         articleService: ArticleService()
     )

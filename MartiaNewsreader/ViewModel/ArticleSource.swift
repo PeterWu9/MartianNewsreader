@@ -20,7 +20,7 @@ protocol ArticleServiceProvider {
 
 // MARK: ViewModel
 @MainActor
-final class ArticlesFetcher<ProofReader: ArticleProofReader, ArticleService: ArticleServiceProvider>: ObservableObject {
+final class ArticleSource<ProofReader: ArticleProofReader, ArticleService: ArticleServiceProvider>: ObservableObject {
     
     @Published private(set) var articles: Articles = []
     
@@ -39,7 +39,6 @@ final class ArticlesFetcher<ProofReader: ArticleProofReader, ArticleService: Art
         articles = try await withThrowingTaskGroup(of: Article.self) { group in
             for article in fetchedArticles {
                 group.addTask {
-                    await Task.yield()
                     // Allows strong self capture because self won't outlive the scope of throwing task group closure
                     try await self.proofRead(article)
                 }
@@ -51,7 +50,7 @@ final class ArticlesFetcher<ProofReader: ArticleProofReader, ArticleService: Art
         }
     }
     
-    func proofRead(_ article: Article) async throws -> Article {
+    private func proofRead(_ article: Article) async throws -> Article {
         return try await Article(
             title: article.title,
             images: article.images,
