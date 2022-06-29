@@ -59,3 +59,18 @@ final class ArticleSource<ProofReader: ArticleProofReader, ArticleService: Artic
     }
 }
 
+enum ArticleSourceError: Error, LocalizedError {
+    case invalidArticleIndex
+}
+
+// MARK: User Actions
+extension ArticleSource {
+    func bookmarkButtonTapped(_ article: Article) throws {
+        guard let index = articles.firstIndex(of: article) else {
+            throw ArticleSourceError.invalidArticleIndex
+        }
+        articles[index].isBookmarked.toggle()
+        // TODO: Implement saving bookmarked articles data store (which should be async operation on a database actor
+    }
+}
+

@@ -5,6 +5,7 @@ struct Article: Codable, Hashable, Identifiable {
     let title: String
     let images: [ArticleImage]
     let body: String
+    var isBookmarked = false
     
     private enum CodingKeys : String, CodingKey {
         case title, images, body

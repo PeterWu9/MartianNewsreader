@@ -9,8 +9,14 @@ import SwiftUI
 
 struct ArticlesListView: View {
     
+    enum LoadingState {
+        case isLoading
+        case completeLoading
+        case hasLoadingError(Error)
+    }
+    
     @EnvironmentObject var articlesFetcher: ArticleSource<ProofReader, ArticleService>
-    @State var isLoadingArticles: Bool = false
+    @State var loadingState: LoadingState = .isLoading
     
     private let scale: Double = 3.0
     private let padding: Double = 24.0
@@ -18,11 +24,12 @@ struct ArticlesListView: View {
     var body: some View {
         GeometryReader { geometry in
             NavigationView {
-                if isLoadingArticles {
+                switch loadingState {
+                case .isLoading:
                     ProgressView()
                         .scaleEffect(.init(scale), anchor: .center)
                         .progressViewStyle(CircularProgressViewStyle(tint: .pink))
-                } else {
+                case .completeLoading:
                     List {
                         ForEach(articlesFetcher.articles) { article in
                             ArticleRow(
@@ -34,7 +41,10 @@ struct ArticlesListView: View {
                             // Enables navigation to article detail view but hides the disclosure button
                             .overlay(
                                 NavigationLink(
-                                    destination: { ArticleView(article: article) },
+                                    destination: {
+                                        ArticleView(article: article)
+                                            .environmentObject(articlesFetcher)
+                                    },
                                     label: { EmptyView() }
                                 )
                                 .opacity(0)
@@ -49,23 +59,35 @@ struct ArticlesListView: View {
                             TitleView()
                         }
                     }
+                case .hasLoadingError(let error):
+                    // TODO: Add description for pull to refresh to try again
+                    VStack {
+                        LoadingErrorView(error: error)
+                            .padding()
+                            .navigationBarTitleDisplayMode(.inline)
+                            .toolbar {
+                                ToolbarItem(placement: .principal) {
+                                    TitleView()
+                                }
+                            }
+                        Spacer()
+                    }
                 }
             }
             .task {
-                isLoadingArticles = true
+                loadingState = .isLoading
                 do {
                     try await articlesFetcher.fetchArticles()
-                    isLoadingArticles = false
+                    loadingState = .completeLoading
                 } catch {
-                    // TODO: Show error view
-                    isLoadingArticles = false
+                    loadingState = .hasLoadingError(error)
                 }
             }
         }
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct ArticlesListView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             ArticlesListView()

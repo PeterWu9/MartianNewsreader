@@ -20,6 +20,7 @@
 		F9627CD9286BC77D002688D7 /* ArticleService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9627CD8286BC77D002688D7 /* ArticleService.swift */; };
 		F9627CE2286C1228002688D7 /* NetworkingLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = F9627CE1286C1228002688D7 /* NetworkingLibrary */; };
 		F9627CE4286C122B002688D7 /* ProofReadingLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = F9627CE3286C122B002688D7 /* ProofReadingLibrary */; };
+		F9627CE7286CC74A002688D7 /* LoadingErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9627CE6286CC74A002688D7 /* LoadingErrorView.swift */; };
 		F962FD1E286A538E003CF115 /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F962FD1D286A538E003CF115 /* TitleView.swift */; };
 		F9953A2F2868DDF9003D0062 /* ArticleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9953A2E2868DDF9003D0062 /* ArticleView.swift */; };
 /* End PBXBuildFile section */
@@ -40,6 +41,7 @@
 		F9627CD8286BC77D002688D7 /* ArticleService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleService.swift; sourceTree = "<group>"; };
 		F9627CDF286C121C002688D7 /* ProofReadingLibrary */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = ProofReadingLibrary; sourceTree = "<group>"; };
 		F9627CE0286C121C002688D7 /* NetworkingLibrary */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = NetworkingLibrary; sourceTree = "<group>"; };
+		F9627CE6286CC74A002688D7 /* LoadingErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingErrorView.swift; sourceTree = "<group>"; };
 		F962FD1D286A538E003CF115 /* TitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
 		F9953A2E2868DDF9003D0062 /* ArticleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -148,6 +150,7 @@
 				F93BEB872867C262005ACB2E /* ArticleRow.swift */,
 				F90A2E6B286843FB00DF0405 /* ArticleRowImage.swift */,
 				F962FD1D286A538E003CF115 /* TitleView.swift */,
+				F9627CE6286CC74A002688D7 /* LoadingErrorView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -234,6 +237,7 @@
 				F9953A2F2868DDF9003D0062 /* ArticleView.swift in Sources */,
 				F92F87672867B0C9008A681E /* Article.swift in Sources */,
 				F92F87592867AE77008A681E /* MartiaNewsreaderApp.swift in Sources */,
+				F9627CE7286CC74A002688D7 /* LoadingErrorView.swift in Sources */,
 				F93BEB882867C262005ACB2E /* ArticleRow.swift in Sources */,
 				F90A2E6C286843FD00DF0405 /* ArticleRowImage.swift in Sources */,
 				F962FD1E286A538E003CF115 /* TitleView.swift in Sources */,
