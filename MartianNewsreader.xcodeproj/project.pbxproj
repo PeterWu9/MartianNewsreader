@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		F90A2E6C286843FD00DF0405 /* ArticleRowImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90A2E6B286843FB00DF0405 /* ArticleRowImage.swift */; };
-		F92F87592867AE77008A681E /* MartiaNewsreaderApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F92F87582867AE77008A681E /* MartiaNewsreaderApp.swift */; };
+		F92F87592867AE77008A681E /* MartianNewsreaderApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F92F87582867AE77008A681E /* MartianNewsreaderApp.swift */; };
 		F92F875B2867AE77008A681E /* ArticlesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F92F875A2867AE77008A681E /* ArticlesListView.swift */; };
 		F92F875D2867AE7B008A681E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F92F875C2867AE7B008A681E /* Assets.xcassets */; };
 		F92F87602867AE7B008A681E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F92F875F2867AE7B008A681E /* Preview Assets.xcassets */; };
@@ -29,7 +29,7 @@
 /* Begin PBXFileReference section */
 		F90A2E6B286843FB00DF0405 /* ArticleRowImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleRowImage.swift; sourceTree = "<group>"; };
 		F92F87552867AE77008A681E /* MartianNewsreader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MartianNewsreader.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		F92F87582867AE77008A681E /* MartiaNewsreaderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MartiaNewsreaderApp.swift; sourceTree = "<group>"; };
+		F92F87582867AE77008A681E /* MartianNewsreaderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MartianNewsreaderApp.swift; sourceTree = "<group>"; };
 		F92F875A2867AE77008A681E /* ArticlesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticlesListView.swift; sourceTree = "<group>"; };
 		F92F875C2867AE7B008A681E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F92F875F2867AE7B008A681E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -66,7 +66,7 @@
 			children = (
 				F9627CE0286C121C002688D7 /* NetworkingLibrary */,
 				F9627CDF286C121C002688D7 /* ProofReadingLibrary */,
-				F92F87572867AE77008A681E /* MartiaNewsreader */,
+				F92F87572867AE77008A681E /* MartianNewsreader */,
 				F92F87562867AE77008A681E /* Products */,
 				F94EF35A286BB4630087992F /* Frameworks */,
 			);
@@ -80,10 +80,10 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		F92F87572867AE77008A681E /* MartiaNewsreader */ = {
+		F92F87572867AE77008A681E /* MartianNewsreader */ = {
 			isa = PBXGroup;
 			children = (
-				F92F87582867AE77008A681E /* MartiaNewsreaderApp.swift */,
+				F92F87582867AE77008A681E /* MartianNewsreaderApp.swift */,
 				F9627CDA286BCA93002688D7 /* Services */,
 				F962FD1A286A34BF003CF115 /* ViewModel */,
 				F92F87682867B163008A681E /* Model */,
@@ -91,7 +91,7 @@
 				F92F875E2867AE7B008A681E /* Preview Content */,
 				F9627CD7286BC1E8002688D7 /* SupportingFiles */,
 			);
-			path = MartiaNewsreader;
+			path = MartianNewsreader;
 			sourceTree = "<group>";
 		};
 		F92F875E2867AE7B008A681E /* Preview Content */ = {
@@ -240,7 +240,7 @@
 				F9953A2F2868DDF9003D0062 /* ArticleView.swift in Sources */,
 				F9627CE9286CD26A002688D7 /* CurrentDateView.swift in Sources */,
 				F92F87672867B0C9008A681E /* Article.swift in Sources */,
-				F92F87592867AE77008A681E /* MartiaNewsreaderApp.swift in Sources */,
+				F92F87592867AE77008A681E /* MartianNewsreaderApp.swift in Sources */,
 				F9627CE7286CC74A002688D7 /* LoadingErrorView.swift in Sources */,
 				F93BEB882867C262005ACB2E /* ArticleRow.swift in Sources */,
 				F90A2E6C286843FD00DF0405 /* ArticleRowImage.swift in Sources */,
@@ -372,11 +372,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"MartiaNewsreader/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"MartianNewsreader/Preview Content\"";
 				DEVELOPMENT_TEAM = GG58NB3258;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = MartiaNewsreader/SupportingFiles/Info.plist;
+				INFOPLIST_FILE = MartianNewsreader/SupportingFiles/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -402,11 +402,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"MartiaNewsreader/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"MartianNewsreader/Preview Content\"";
 				DEVELOPMENT_TEAM = GG58NB3258;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = MartiaNewsreader/SupportingFiles/Info.plist;
+				INFOPLIST_FILE = MartianNewsreader/SupportingFiles/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
