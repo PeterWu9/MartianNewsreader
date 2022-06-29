@@ -20,13 +20,15 @@
 		F9627CD9286BC77D002688D7 /* ArticleService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9627CD8286BC77D002688D7 /* ArticleService.swift */; };
 		F9627CE2286C1228002688D7 /* NetworkingLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = F9627CE1286C1228002688D7 /* NetworkingLibrary */; };
 		F9627CE4286C122B002688D7 /* ProofReadingLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = F9627CE3286C122B002688D7 /* ProofReadingLibrary */; };
+		F9627CE7286CC74A002688D7 /* LoadingErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9627CE6286CC74A002688D7 /* LoadingErrorView.swift */; };
+		F9627CE9286CD26A002688D7 /* CurrentDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9627CE8286CD26A002688D7 /* CurrentDateView.swift */; };
 		F962FD1E286A538E003CF115 /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F962FD1D286A538E003CF115 /* TitleView.swift */; };
 		F9953A2F2868DDF9003D0062 /* ArticleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9953A2E2868DDF9003D0062 /* ArticleView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		F90A2E6B286843FB00DF0405 /* ArticleRowImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleRowImage.swift; sourceTree = "<group>"; };
-		F92F87552867AE77008A681E /* MartiaNewsreader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MartiaNewsreader.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F92F87552867AE77008A681E /* MartianNewsreader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MartianNewsreader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F92F87582867AE77008A681E /* MartiaNewsreaderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MartiaNewsreaderApp.swift; sourceTree = "<group>"; };
 		F92F875A2867AE77008A681E /* ArticlesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticlesListView.swift; sourceTree = "<group>"; };
 		F92F875C2867AE7B008A681E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -40,6 +42,8 @@
 		F9627CD8286BC77D002688D7 /* ArticleService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleService.swift; sourceTree = "<group>"; };
 		F9627CDF286C121C002688D7 /* ProofReadingLibrary */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = ProofReadingLibrary; sourceTree = "<group>"; };
 		F9627CE0286C121C002688D7 /* NetworkingLibrary */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = NetworkingLibrary; sourceTree = "<group>"; };
+		F9627CE6286CC74A002688D7 /* LoadingErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingErrorView.swift; sourceTree = "<group>"; };
+		F9627CE8286CD26A002688D7 /* CurrentDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentDateView.swift; sourceTree = "<group>"; };
 		F962FD1D286A538E003CF115 /* TitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
 		F9953A2E2868DDF9003D0062 /* ArticleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -71,7 +75,7 @@
 		F92F87562867AE77008A681E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				F92F87552867AE77008A681E /* MartiaNewsreader.app */,
+				F92F87552867AE77008A681E /* MartianNewsreader.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -144,28 +148,22 @@
 			isa = PBXGroup;
 			children = (
 				F9953A2E2868DDF9003D0062 /* ArticleView.swift */,
-				F9953A2D2868DDE3003D0062 /* ListView */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		F9953A2D2868DDE3003D0062 /* ListView */ = {
-			isa = PBXGroup;
-			children = (
 				F92F875A2867AE77008A681E /* ArticlesListView.swift */,
 				F93BEB872867C262005ACB2E /* ArticleRow.swift */,
 				F90A2E6B286843FB00DF0405 /* ArticleRowImage.swift */,
 				F962FD1D286A538E003CF115 /* TitleView.swift */,
+				F9627CE6286CC74A002688D7 /* LoadingErrorView.swift */,
+				F9627CE8286CD26A002688D7 /* CurrentDateView.swift */,
 			);
-			path = ListView;
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		F92F87542867AE77008A681E /* MartiaNewsreader */ = {
+		F92F87542867AE77008A681E /* MartianNewsreader */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F92F87632867AE7B008A681E /* Build configuration list for PBXNativeTarget "MartiaNewsreader" */;
+			buildConfigurationList = F92F87632867AE7B008A681E /* Build configuration list for PBXNativeTarget "MartianNewsreader" */;
 			buildPhases = (
 				F92F87512867AE77008A681E /* Sources */,
 				F92F87522867AE77008A681E /* Frameworks */,
@@ -175,13 +173,13 @@
 			);
 			dependencies = (
 			);
-			name = MartiaNewsreader;
+			name = MartianNewsreader;
 			packageProductDependencies = (
 				F9627CE1286C1228002688D7 /* NetworkingLibrary */,
 				F9627CE3286C122B002688D7 /* ProofReadingLibrary */,
 			);
 			productName = MartiaNewsreader;
-			productReference = F92F87552867AE77008A681E /* MartiaNewsreader.app */;
+			productReference = F92F87552867AE77008A681E /* MartianNewsreader.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -199,7 +197,7 @@
 					};
 				};
 			};
-			buildConfigurationList = F92F87502867AE77008A681E /* Build configuration list for PBXProject "MartiaNewsreader" */;
+			buildConfigurationList = F92F87502867AE77008A681E /* Build configuration list for PBXProject "MartianNewsreader" */;
 			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -212,7 +210,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				F92F87542867AE77008A681E /* MartiaNewsreader */,
+				F92F87542867AE77008A681E /* MartianNewsreader */,
 			);
 		};
 /* End PBXProject section */
@@ -240,8 +238,10 @@
 				F92F875B2867AE77008A681E /* ArticlesListView.swift in Sources */,
 				F94EF357286BB3AE0087992F /* ProofReader.swift in Sources */,
 				F9953A2F2868DDF9003D0062 /* ArticleView.swift in Sources */,
+				F9627CE9286CD26A002688D7 /* CurrentDateView.swift in Sources */,
 				F92F87672867B0C9008A681E /* Article.swift in Sources */,
 				F92F87592867AE77008A681E /* MartiaNewsreaderApp.swift in Sources */,
+				F9627CE7286CC74A002688D7 /* LoadingErrorView.swift in Sources */,
 				F93BEB882867C262005ACB2E /* ArticleRow.swift in Sources */,
 				F90A2E6C286843FD00DF0405 /* ArticleRowImage.swift in Sources */,
 				F962FD1E286A538E003CF115 /* TitleView.swift in Sources */,
@@ -428,7 +428,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		F92F87502867AE77008A681E /* Build configuration list for PBXProject "MartiaNewsreader" */ = {
+		F92F87502867AE77008A681E /* Build configuration list for PBXProject "MartianNewsreader" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F92F87612867AE7B008A681E /* Debug */,
@@ -437,7 +437,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F92F87632867AE7B008A681E /* Build configuration list for PBXNativeTarget "MartiaNewsreader" */ = {
+		F92F87632867AE7B008A681E /* Build configuration list for PBXNativeTarget "MartianNewsreader" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F92F87642867AE7B008A681E /* Debug */,

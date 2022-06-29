@@ -8,7 +8,11 @@
 import SwiftUI
 
 struct ArticleView: View {
+    
     let article: Article
+    
+    @EnvironmentObject var source: ArticleSource<ProofReader, ArticleService>
+    
     var body: some View {
         GeometryReader { geometry in
             ScrollView {
@@ -18,7 +22,7 @@ struct ArticleView: View {
                         .fixedSize(horizontal: false, vertical: true)
                         .font(Font.system(.title, design: .serif))
                         .padding([.bottom])
-
+                    
                     if let url = article.topImage?.url {
                         AsyncImage(url: url) { phase in
                             if let image = phase.image {
@@ -39,6 +43,18 @@ struct ArticleView: View {
                     Text(article.body)
                 }
                 .padding([.leading, .trailing])
+            }
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button {
+                        // TODO:  Implement error view for bookmark operation failure
+                        // If bookmark operation does not succeed, user will know because the button image won't change
+                        try? source.bookmarkButtonTapped(article)
+                    } label: {
+                        Image(systemName: article.isBookmarked ? "bookmark.fill" : "bookmark")
+                    }
+
+                }
             }
         }
     }
