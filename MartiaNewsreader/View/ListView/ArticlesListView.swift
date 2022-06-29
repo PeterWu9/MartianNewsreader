@@ -38,19 +38,19 @@ struct ArticlesListView: View {
                                     label: { EmptyView() }
                                 )
                                 .opacity(0)
+                                .navigationTitle("")
                             )
                         }
                     }
+                    .listStyle(.plain)
                     .navigationBarTitleDisplayMode(.inline)
                     .toolbar {
-                        ToolbarItem(placement: .navigationBarLeading) {
+                        ToolbarItem(placement: .principal) {
                             TitleView()
                         }
                     }
-                    .listStyle(.plain)
                 }
             }
-            .navigationViewStyle(.stack)
             .task {
                 isLoadingArticles = true
                 do {

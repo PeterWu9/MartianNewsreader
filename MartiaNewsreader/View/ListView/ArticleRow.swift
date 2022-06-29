@@ -44,5 +44,6 @@ struct ArticleRow: View {
 struct ArticleRow_Previews: PreviewProvider {
     static var previews: some View {
         ArticleRow(article: Article.sample, width: 380, padding: 24)
+            .previewLayout(.fixed(width: 380, height: 450))
     }
 }
