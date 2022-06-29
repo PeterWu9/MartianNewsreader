@@ -9,8 +9,8 @@ import Foundation
 
 // MARK: Dependencies
 protocol ArticleProofReader {
-    // This function may be an asynchronous operation (services performed over network, database..etc)
     init()
+    // Proof reading may be an asynchronous operation (could be services performed over network or a potentially long-running background operation)
     func proofRead(_ article: Article) async throws -> String
 }
 
@@ -24,8 +24,8 @@ final class ArticlesFetcher<ProofReader: ArticleProofReader, ArticleService: Art
     
     @Published private(set) var articles: Articles = []
     
-    private var reader: ProofReader
-    private var articleService: ArticleService
+    private let reader: ProofReader
+    private let articleService: ArticleService
     
     init(reader: ProofReader, articleService: ArticleService) {
         self.reader = reader
@@ -39,6 +39,7 @@ final class ArticlesFetcher<ProofReader: ArticleProofReader, ArticleService: Art
         articles = try await withThrowingTaskGroup(of: Article.self) { group in
             for article in fetchedArticles {
                 group.addTask {
+                    await Task.yield()
                     // Allows strong self capture because self won't outlive the scope of throwing task group closure
                     try await self.proofRead(article)
                 }
