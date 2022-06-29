@@ -14,28 +14,14 @@ struct ArticleRow: View {
     
     var body: some View {
         VStack{
-            HStack {
-                Spacer()
-                    .frame(width: padding)
-                ArticleRowImage(article: article, width: width - padding * 2)
-                Spacer()
-                    .frame(width: padding)
-            }
-            VStack(alignment: .leading) {
-                Text(article.title)
-                    .lineLimit(nil)
-                    .fixedSize(horizontal: false, vertical: true)
-                    .font(Font.system(.title, design: .serif))
-                    .padding([.bottom])
-                
-                Text(article.body)
-                    .lineLimit(3)
-                    .fixedSize(horizontal: false, vertical: true)
-                // TODO: See if I can make the size of Text view to accommodate the last sentence.
-                Spacer()
-                    .frame(height: 24)
-            }
-            .frame(width: width - padding * 2)
+            ArticleRowImage(article: article, width: width)
+
+            Text(article.title)
+                .multilineTextAlignment(.leading)
+                .lineLimit(nil)
+                .fixedSize(horizontal: false, vertical: true)
+                .font(Font.system(.title, design: .serif))
+                .padding([.bottom])
         }
         .padding([.top])
     }
