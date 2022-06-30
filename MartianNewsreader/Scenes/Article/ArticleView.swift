@@ -18,6 +18,7 @@ struct ArticleView: View {
             ScrollView {
                 VStack {
                     Text(article.title)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
                         .lineLimit(nil)
                         .fixedSize(horizontal: false, vertical: true)
                         .font(Font.system(.title, design: .serif))

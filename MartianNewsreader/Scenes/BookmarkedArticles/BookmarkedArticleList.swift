@@ -12,6 +12,8 @@ struct BookmarkedArticleList: View {
     @EnvironmentObject var articleSource: ArticleSource<ProofReader, ArticleService>
     let title: String
     let subtitle: String
+    private let imageWidth = 50.0
+    private let imageCornerRadius = 5.0
     
     var body: some View {
         NavigationView {
@@ -21,7 +23,8 @@ struct BookmarkedArticleList: View {
                     .listRowSeparator(.hidden)
                 ForEach(articleSource.bookmarkedArticles) { article in
                     HStack {
-                        ArticleAsyncImage(article: article, width: 50, maxHeight: 50)
+                        ArticleAsyncImage(article: article, width: imageWidth, maxHeight: imageWidth)
+                            .cornerRadius(imageCornerRadius)
                         Text(article.title)
                     }
                     .overlay(
