@@ -14,7 +14,7 @@ struct ArticleRow: View {
     
     var body: some View {
         VStack{
-            ArticleRowImage(article: article, width: width)
+            ArticleAsyncImage(article: article, width: width)
             
             Text(article.title)
                 .font(Font.system(.title, design: .serif))

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ArticleRowImage: View {
+struct ArticleAsyncImage: View {
     let article: Article
     let width: Double
     let height: Double
@@ -39,8 +39,8 @@ struct ArticleRowImage: View {
     }
 }
 
-struct ArticleRowImage_Previews: PreviewProvider {
+struct ArticleAsyncImage_Previews: PreviewProvider {
     static var previews: some View {
-        ArticleRowImage(article: Article.sample, width: 400)
+        ArticleAsyncImage(article: Article.sample, width: 400)
     }
 }

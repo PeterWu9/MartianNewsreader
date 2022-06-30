@@ -11,25 +11,33 @@ struct HomeView: View {
     
     @State private var selection: Tab = .today
     
-    enum Tab {
-        case today
-        case bookmark
+    enum Constant {
+        static let mainTitle = "Martian News"
+        static let bookmarkSubtitle = "Bookmarks"
+        static let newsPaperImageName = "newspaper"
+        static let bookmarkImageName = "bookmark"
     }
+    
+    enum Tab: String {
+        case today = "Today"
+        case bookmarks = "Bookmarks"
+    }
+    
     @EnvironmentObject var articleSource: ArticleSource<ProofReader, ArticleService>
     
     var body: some View {
         TabView(selection: $selection) {
-            ArticlesListView(title: "Martian News")
+            ArticlesListView(title: Constant.mainTitle)
                 .tabItem {
-                    Label("Today", systemImage: "newspaper")
+                    Label(Tab.today.rawValue, systemImage: Constant.newsPaperImageName)
                 }
                 .tag(Tab.today)
             
-            BookmarkedArticleList(title: "Martian News")
+            BookmarkedArticleList(title: Constant.mainTitle, subtitle: Constant.bookmarkSubtitle)
                 .tabItem {
-                    Label("Bookmark", systemImage: "bookmark")
+                    Label(Tab.bookmarks.rawValue, systemImage: Constant.bookmarkImageName)
                 }
-                .tag(Tab.bookmark)
+                .tag(Tab.bookmarks)
         }
     }
 }
