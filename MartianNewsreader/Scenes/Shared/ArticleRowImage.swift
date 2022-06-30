@@ -10,7 +10,13 @@ import SwiftUI
 struct ArticleRowImage: View {
     let article: Article
     let width: Double
-    let height: Double = 200
+    let height: Double
+    
+    init(article: Article, width: Double, height: Double = 200) {
+        self.article = article
+        self.width = width
+        self.height = height
+    }
     
     var body: some View {
         if let url = article.topImage?.url {

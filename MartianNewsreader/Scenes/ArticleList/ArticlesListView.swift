@@ -18,6 +18,8 @@ struct ArticlesListView: View {
     @EnvironmentObject var articlesFetcher: ArticleSource<ProofReader, ArticleService>
     @State var loadingState: LoadingState = .isLoading
     
+    let title: String
+    
     private let scale: Double = 3.0
     private let padding: Double = 24.0
     
@@ -31,8 +33,12 @@ struct ArticlesListView: View {
                         .progressViewStyle(CircularProgressViewStyle(tint: .pink))
                 case .completeLoading:
                     List {
+                        
                         CurrentDateView()
-                            .listRowSeparator(.hidden)
+                            .font(.system(.headline))
+                            .listRowInsets(EdgeInsets())
+                            .padding([.leading])
+
                         ForEach(articlesFetcher.articles) { article in
                             ArticleRow(
                                 article: article,
@@ -50,7 +56,6 @@ struct ArticlesListView: View {
                                     label: { EmptyView() }
                                 )
                                 .opacity(0)
-                                .navigationTitle("")
                             )
                         }
                     }
@@ -58,7 +63,7 @@ struct ArticlesListView: View {
                     .navigationBarTitleDisplayMode(.inline)
                     .toolbar {
                         ToolbarItem(placement: .principal) {
-                            TitleView()
+                            TitleView(title: title)
                         }
                     }
                 case .hasLoadingError(let error):
@@ -69,11 +74,12 @@ struct ArticlesListView: View {
                             .navigationBarTitleDisplayMode(.inline)
                             .toolbar {
                                 ToolbarItem(placement: .principal) {
-                                    TitleView()
+                                    TitleView(title: title)
                                 }
                             }
                         Spacer()
                     }
+                    .navigationTitle(title)
                 }
             }
             .task {
@@ -90,12 +96,13 @@ struct ArticlesListView: View {
 }
 
 struct ArticlesListView_Previews: PreviewProvider {
+    static let title = "Today's News"
     static var previews: some View {
         Group {
-            ArticlesListView()
+            ArticlesListView(title: Self.title)
                 .environmentObject(ArticleSource(reader: ProofReader(), articleService: ArticleService()))
                 .previewDevice(PreviewDevice(rawValue: "iPhone 13 Pro Max"))
-            ArticlesListView()
+            ArticlesListView(title: Self.title)
                 .environmentObject(ArticleSource(reader: ProofReader(), articleService: ArticleService()))
                 .previewDevice(PreviewDevice(rawValue: "iPhone SE (3rd generation)"))
         }

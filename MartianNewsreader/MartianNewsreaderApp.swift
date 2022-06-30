@@ -16,7 +16,7 @@ struct MartianNewsreaderApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ArticlesListView()
+            HomeView()
                 .environmentObject(newsFetcher)
         }
     }

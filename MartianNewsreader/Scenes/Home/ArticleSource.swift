@@ -23,10 +23,11 @@ protocol ArticleServiceProvider {
 final class ArticleSource<ProofReader: ArticleProofReader, ArticleService: ArticleServiceProvider>: ObservableObject {
     
     @Published private(set) var articles: Articles = []
+    @Published private(set) var bookmarkedArticles: Articles = []
     
     private let reader: ProofReader
     private let articleService: ArticleService
-    
+        
     init(reader: ProofReader, articleService: ArticleService) {
         self.reader = reader
         self.articleService = articleService
@@ -71,6 +72,8 @@ extension ArticleSource {
         }
         articles[index].isBookmarked.toggle()
         // TODO: Implement saving bookmarked articles data store (which should be async operation on a database actor
+        
+        bookmarkedArticles = articles.filter { $0.isBookmarked }
     }
 }
 
