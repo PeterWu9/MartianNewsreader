@@ -20,17 +20,35 @@ protocol ArticleServiceProvider {
 
 // MARK: ViewModel
 @MainActor
-final class ArticleSource<ProofReader: ArticleProofReader, ArticleService: ArticleServiceProvider>: ObservableObject {
+final class ArticleSource<ProofReader: ArticleProofReader, ArticleService: ArticleServiceProvider>: ObservableObject, Identifiable {
     
     @Published private(set) var articles: Articles = []
     @Published private(set) var bookmarkedArticles: Articles = []
-    
+    @Published private(set) var loadingState: LoadingState = .isLoading
+
     private let reader: ProofReader
     private let articleService: ArticleService
+    
+    enum LoadingState {
+        case isLoading
+        case completeLoading
+        case hasLoadingError(Error)
+    }
+
         
     init(reader: ProofReader, articleService: ArticleService) {
         self.reader = reader
         self.articleService = articleService
+        
+        Task {
+            do {
+                loadingState = .isLoading
+                try await fetchArticles()
+                loadingState = .completeLoading
+            } catch {
+                loadingState = .hasLoadingError(error)
+            }
+        }
     }
         
     func fetchArticles() async throws {

@@ -108,6 +108,7 @@
 		F92F87682867B163008A681E /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				F92F876D2867B6B8008A681E /* ArticleSource.swift */,
 				F92F87662867B0C9008A681E /* Article.swift */,
 				F94EF34E286B88E60087992F /* Articles.swift */,
 			);
@@ -145,8 +146,8 @@
 				F9627D08286D6778002688D7 /* Shared */,
 				F9627D02286D62A4002688D7 /* Home */,
 				F9627D03286D62D9002688D7 /* ArticleList */,
-				F9627D05286D651B002688D7 /* BookmarkedArticles */,
 				F9627D04286D62F8002688D7 /* Article */,
+				F9627D05286D651B002688D7 /* BookmarkedArticles */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -155,7 +156,6 @@
 			isa = PBXGroup;
 			children = (
 				F9627CFE286D607A002688D7 /* HomeView.swift */,
-				F92F876D2867B6B8008A681E /* ArticleSource.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";

@@ -9,14 +9,7 @@ import SwiftUI
 
 struct ArticlesListView: View {
     
-    enum LoadingState {
-        case isLoading
-        case completeLoading
-        case hasLoadingError(Error)
-    }
-    
     @EnvironmentObject var articlesFetcher: ArticleSource<ProofReader, ArticleService>
-    @State var loadingState: LoadingState = .isLoading
     
     let title: String
     
@@ -26,7 +19,7 @@ struct ArticlesListView: View {
     var body: some View {
         GeometryReader { geometry in
             NavigationView {
-                switch loadingState {
+                switch articlesFetcher.loadingState {
                 case .isLoading:
                     ProgressView()
                         .scaleEffect(.init(scale), anchor: .center)
@@ -80,15 +73,6 @@ struct ArticlesListView: View {
                         Spacer()
                     }
                     .navigationTitle(title)
-                }
-            }
-            .task {
-                loadingState = .isLoading
-                do {
-                    try await articlesFetcher.fetchArticles()
-                    loadingState = .completeLoading
-                } catch {
-                    loadingState = .hasLoadingError(error)
                 }
             }
         }
