@@ -19,19 +19,27 @@ struct ArticlesListView: View {
     var body: some View {
         GeometryReader { geometry in
             NavigationView {
-                switch articlesFetcher.loadingState {
-                case .isLoading:
-                    ProgressView()
-                        .scaleEffect(.init(scale), anchor: .center)
-                        .progressViewStyle(CircularProgressViewStyle(tint: .pink))
-                case .completeLoading:
-                    List {
+                List {
+                    switch articlesFetcher.loadingState {
                         
+                    case .isLoading:
+                        Spacer()
+                        HStack(alignment: .center) {
+                            Spacer()
+                            ProgressView()
+                                .scaleEffect(.init(scale), anchor: .center)
+                                .progressViewStyle(CircularProgressViewStyle(tint: .pink))
+                            Spacer()
+                        }
+                        .listRowSeparator(.hidden)
+                        
+                    case .completeLoading:
                         CurrentDateView()
                             .font(.system(.headline))
+                            .listSectionSeparator(.hidden)
                             .listRowInsets(EdgeInsets())
                             .padding([.leading])
-
+                        
                         ForEach(articlesFetcher.articles) { article in
                             ArticleRow(
                                 article: article,
@@ -51,28 +59,26 @@ struct ArticlesListView: View {
                                 .opacity(0)
                             )
                         }
-                    }
-                    .listStyle(.plain)
-                    .navigationBarTitleDisplayMode(.inline)
-                    .toolbar {
-                        ToolbarItem(placement: .principal) {
-                            TitleView(title: title)
-                        }
-                    }
-                case .hasLoadingError(let error):
-                    // TODO: Add description for pull to refresh to try again
-                    VStack {
-                        LoadingErrorView(error: error)
-                            .padding()
-                            .navigationBarTitleDisplayMode(.inline)
-                            .toolbar {
-                                ToolbarItem(placement: .principal) {
-                                    TitleView(title: title)
-                                }
-                            }
+                        
+                    case .hasLoadingError(let error):
+                        // TODO: Add description for pull to refresh to try again
                         Spacer()
+                        HStack {
+                            Spacer()
+                            LoadingErrorView(error: error)
+                                .padding()
+                            Spacer()
+                        }
+                        .listRowSeparator(.hidden)
+                        .listRowInsets(EdgeInsets())
                     }
-                    .navigationTitle(title)
+                }
+                .listStyle(.plain)
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItem(placement: .principal) {
+                        TitleView(title: title)
+                    }
                 }
             }
         }
