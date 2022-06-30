@@ -8,22 +8,20 @@
 import SwiftUI
 
 struct ArticleView: View {
-    
-    let article: Article
-    
-    @EnvironmentObject var source: ArticleSource<ProofReader, ArticleService>
+        
+    @ObservedObject var viewModel: ArticleViewModel
     
     var body: some View {
         GeometryReader { geometry in
             ScrollView {
                 VStack {
-                    Text(article.title)
+                    Text(viewModel.article.title)
                         .lineLimit(nil)
                         .fixedSize(horizontal: false, vertical: true)
                         .font(Font.system(.title, design: .serif))
                         .padding([.bottom])
                     
-                    if let url = article.topImage?.url {
+                    if let url = viewModel.article.topImage?.url {
                         AsyncImage(url: url) { phase in
                             if let image = phase.image {
                                 image // Displays the loaded image.
@@ -40,7 +38,7 @@ struct ArticleView: View {
                     }
                     Spacer()
                         .frame(height: 24)
-                    Text(article.body)
+                    Text(viewModel.article.body)
                 }
                 .padding([.leading, .trailing])
             }
@@ -49,9 +47,9 @@ struct ArticleView: View {
                     Button {
                         // TODO:  Implement error view for bookmark operation failure
                         // If bookmark operation does not succeed, user will know because the button image won't change
-                        try? source.bookmarkButtonTapped(article)
+                        try? viewModel.toggleBookmark()
                     } label: {
-                        Image(systemName: article.isBookmarked ? "bookmark.fill" : "bookmark")
+                        Image(systemName: viewModel.article.isBookmarked ? "bookmark.fill" : "bookmark")
                     }
 
                 }
@@ -60,8 +58,8 @@ struct ArticleView: View {
     }
 }
 
-struct ArticleView_Previews: PreviewProvider {
-    static var previews: some View {
-        ArticleView(article: Article.sample)
-    }
-}
+//struct ArticleView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ArticleView(article: Article.sample)
+//    }
+//}

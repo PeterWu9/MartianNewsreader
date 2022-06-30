@@ -9,15 +9,12 @@ import SwiftUI
 
 @main
 struct MartianNewsreaderApp: App {
-    @StateObject var newsFetcher = ArticleSource(
-        reader: ProofReader(),
-        articleService: ArticleService()
-    )
+    
+    @StateObject var coordinator = HomeCoordinator(articleService: ArticleService())
     
     var body: some Scene {
         WindowGroup {
-            ArticlesListView()
-                .environmentObject(newsFetcher)
+            HomeCoordinatorView(coordinator: coordinator)
         }
     }
 }

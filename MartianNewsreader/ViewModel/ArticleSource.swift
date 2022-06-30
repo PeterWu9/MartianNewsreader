@@ -8,15 +8,7 @@
 import Foundation
 
 // MARK: Dependencies
-protocol ArticleProofReader {
-    init()
-    // Proof reading may be an asynchronous operation (could be services performed over network or a potentially long-running background operation)
-    func proofRead(_ article: Article) async throws -> String
-}
 
-protocol ArticleServiceProvider {
-    func fetchArticles() async throws -> Articles
-}
 
 // MARK: ViewModel
 @MainActor
