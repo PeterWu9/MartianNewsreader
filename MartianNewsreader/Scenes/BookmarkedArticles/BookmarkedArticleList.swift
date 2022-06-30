@@ -21,7 +21,7 @@ struct BookmarkedArticleList: View {
                     .listRowSeparator(.hidden)
                 ForEach(articleSource.bookmarkedArticles) { article in
                     HStack {
-                        ArticleAsyncImage(article: article, width: 50, height: 50)
+                        ArticleAsyncImage(article: article, width: 50, maxHeight: 50)
                         Text(article.title)
                     }
                     .overlay(

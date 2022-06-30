@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F90A2E6C286843FD00DF0405 /* ArticleRowImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90A2E6B286843FB00DF0405 /* ArticleRowImage.swift */; };
+		F90A2E6C286843FD00DF0405 /* ArticleAsyncImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90A2E6B286843FB00DF0405 /* ArticleAsyncImage.swift */; };
 		F92F87592867AE77008A681E /* MartianNewsreaderApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F92F87582867AE77008A681E /* MartianNewsreaderApp.swift */; };
 		F92F875B2867AE77008A681E /* ArticlesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F92F875A2867AE77008A681E /* ArticlesListView.swift */; };
 		F92F875D2867AE7B008A681E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F92F875C2867AE7B008A681E /* Assets.xcassets */; };
@@ -29,7 +29,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		F90A2E6B286843FB00DF0405 /* ArticleRowImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleRowImage.swift; sourceTree = "<group>"; };
+		F90A2E6B286843FB00DF0405 /* ArticleAsyncImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleAsyncImage.swift; sourceTree = "<group>"; };
 		F92F87552867AE77008A681E /* MartianNewsreader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MartianNewsreader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F92F87582867AE77008A681E /* MartianNewsreaderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MartianNewsreaderApp.swift; sourceTree = "<group>"; };
 		F92F875A2867AE77008A681E /* ArticlesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticlesListView.swift; sourceTree = "<group>"; };
@@ -191,7 +191,7 @@
 			isa = PBXGroup;
 			children = (
 				F962FD1D286A538E003CF115 /* TitleView.swift */,
-				F90A2E6B286843FB00DF0405 /* ArticleRowImage.swift */,
+				F90A2E6B286843FB00DF0405 /* ArticleAsyncImage.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -283,7 +283,7 @@
 				F92F87592867AE77008A681E /* MartianNewsreaderApp.swift in Sources */,
 				F9627CE7286CC74A002688D7 /* LoadingErrorView.swift in Sources */,
 				F93BEB882867C262005ACB2E /* ArticleRow.swift in Sources */,
-				F90A2E6C286843FD00DF0405 /* ArticleRowImage.swift in Sources */,
+				F90A2E6C286843FD00DF0405 /* ArticleAsyncImage.swift in Sources */,
 				F962FD1E286A538E003CF115 /* TitleView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

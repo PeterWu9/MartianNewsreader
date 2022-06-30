@@ -59,7 +59,7 @@ extension ArticleImage {
     static var sample: ArticleImage {
         .init(
             topImage: true,
-            urlString: "https://s1.nyt.com/ios-newsreader/candidates/images/img3.jpg",
+            urlString: "https://s1.nyt.com/ios-newsreader/candidates/images/img4.jpg",
             width: 480,
             height: 262
         )
