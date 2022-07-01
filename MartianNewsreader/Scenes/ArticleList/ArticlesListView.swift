@@ -24,13 +24,7 @@ struct ArticlesListView: View {
                         
                     case .isLoading:
                         Spacer()
-                        HStack(alignment: .center) {
-                            Spacer()
-                            ProgressView()
-                                .scaleEffect(.init(scale), anchor: .center)
-                                .progressViewStyle(CircularProgressViewStyle(tint: .pink))
-                            Spacer()
-                        }
+                        LoadingView(scale: scale)
                         .listRowSeparator(.hidden)
                         
                     case .completeLoading:
@@ -43,9 +37,9 @@ struct ArticlesListView: View {
                         ForEach(articlesFetcher.articles) { article in
                             ArticleRow(
                                 article: article,
-                                width: geometry.size.width,
-                                padding: padding
+                                width: geometry.size.width
                             )
+                            .padding([.bottom])
                             .listRowInsets(EdgeInsets())
                             // Enables navigation to article detail view but hides the disclosure button
                             .overlay(

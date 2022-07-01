@@ -26,10 +26,11 @@ struct ArticleAsyncImage: View {
         if
             let articleImage = article.topImage,
             let url = articleImage.url {
+            
             AsyncImage(url: url) { phase in
                 switch phase {
                 case .empty:
-                    ProgressView()
+                    LoadingView(scale: 2.0)
                 case .success(let image):
                     image // Displays the loaded image.
                         .resizable()
@@ -37,9 +38,9 @@ struct ArticleAsyncImage: View {
                         .frame(maxWidth: width, maxHeight: maxHeight)
                         .clipped()
                 case .failure:
-                    Image(systemName: Constant.errorImageName)
+                    errorImageView
                 @unknown default:
-                    Image(systemName: Constant.errorImageName)
+                    errorImageView
                 }
             }
         } else {
@@ -47,6 +48,17 @@ struct ArticleAsyncImage: View {
             Image(systemName: Constant.errorImageName)
         }
     }
+    
+    private var errorImageView: some View {
+        Image(systemName: Constant.errorImageName)
+            .resizable()
+            .scaledToFit()
+            .frame(maxWidth: width / 2)
+            .foregroundColor(.gray)
+            .clipped()
+    }
+    
+    
 }
 
 struct ArticleAsyncImage_Previews: PreviewProvider {
