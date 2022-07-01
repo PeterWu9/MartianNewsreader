@@ -10,18 +10,16 @@ import SwiftUI
 struct ArticleRow: View {
     let article: Article
     let width: Double
-    let padding: Double
     
     var body: some View {
         VStack{
-            ArticleRowImage(article: article, width: width)
+            ArticleAsyncImage(article: article, width: width)
             
             Text(article.title)
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+                .lineLimit(nil)
                 .font(Font.system(.title, design: .serif))
-                .frame(width: width, alignment: .leading)
-                .multilineTextAlignment(.leading)
-                .padding([.bottom])
-                .offset(x: 8)
+                .padding([.leading, .bottom, .trailing], 8)
         }
         .padding([.top])
     }
@@ -29,7 +27,7 @@ struct ArticleRow: View {
 
 struct ArticleRow_Previews: PreviewProvider {
     static var previews: some View {
-        ArticleRow(article: Article.sample, width: 380, padding: 24)
-            .previewLayout(.fixed(width: 380, height: 450))
+        ArticleRow(article: Article.sample, width: 380)
+            .previewLayout(.fixed(width: 380, height: 300))
     }
 }

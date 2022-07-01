@@ -9,14 +9,9 @@ import SwiftUI
 
 struct ArticlesListView: View {
     
-    enum LoadingState {
-        case isLoading
-        case completeLoading
-        case hasLoadingError(Error)
-    }
-    
     @EnvironmentObject var articlesFetcher: ArticleSource<ProofReader, ArticleService>
-    @State var loadingState: LoadingState = .isLoading
+    
+    let title: String
     
     private let scale: Double = 3.0
     private let padding: Double = 24.0
@@ -24,21 +19,27 @@ struct ArticlesListView: View {
     var body: some View {
         GeometryReader { geometry in
             NavigationView {
-                switch loadingState {
-                case .isLoading:
-                    ProgressView()
-                        .scaleEffect(.init(scale), anchor: .center)
-                        .progressViewStyle(CircularProgressViewStyle(tint: .pink))
-                case .completeLoading:
-                    List {
+                List {
+                    switch articlesFetcher.loadingState {
+                        
+                    case .isLoading:
+                        Spacer()
+                        LoadingView(scale: scale)
+                        .listRowSeparator(.hidden)
+                        
+                    case .completeLoading:
                         CurrentDateView()
-                            .listRowSeparator(.hidden)
+                            .font(.system(.headline))
+                            .listSectionSeparator(.hidden)
+                            .listRowInsets(EdgeInsets())
+                            .padding([.leading])
+                        
                         ForEach(articlesFetcher.articles) { article in
                             ArticleRow(
                                 article: article,
-                                width: geometry.size.width,
-                                padding: padding
+                                width: geometry.size.width
                             )
+                            .padding([.bottom])
                             .listRowInsets(EdgeInsets())
                             // Enables navigation to article detail view but hides the disclosure button
                             .overlay(
@@ -50,39 +51,28 @@ struct ArticlesListView: View {
                                     label: { EmptyView() }
                                 )
                                 .opacity(0)
-                                .navigationTitle("")
                             )
                         }
-                    }
-                    .listStyle(.plain)
-                    .navigationBarTitleDisplayMode(.inline)
-                    .toolbar {
-                        ToolbarItem(placement: .principal) {
-                            TitleView()
-                        }
-                    }
-                case .hasLoadingError(let error):
-                    // TODO: Add description for pull to refresh to try again
-                    VStack {
-                        LoadingErrorView(error: error)
-                            .padding()
-                            .navigationBarTitleDisplayMode(.inline)
-                            .toolbar {
-                                ToolbarItem(placement: .principal) {
-                                    TitleView()
-                                }
-                            }
+                        
+                    case .hasLoadingError(let error):
+                        // TODO: Add description for pull to refresh to try again
                         Spacer()
+                        HStack {
+                            Spacer()
+                            LoadingErrorView(error: error)
+                                .padding()
+                            Spacer()
+                        }
+                        .listRowSeparator(.hidden)
+                        .listRowInsets(EdgeInsets())
                     }
                 }
-            }
-            .task {
-                loadingState = .isLoading
-                do {
-                    try await articlesFetcher.fetchArticles()
-                    loadingState = .completeLoading
-                } catch {
-                    loadingState = .hasLoadingError(error)
+                .listStyle(.plain)
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItem(placement: .principal) {
+                        TitleView(title: title)
+                    }
                 }
             }
         }
@@ -90,12 +80,13 @@ struct ArticlesListView: View {
 }
 
 struct ArticlesListView_Previews: PreviewProvider {
+    static let title = "Today's News"
     static var previews: some View {
         Group {
-            ArticlesListView()
+            ArticlesListView(title: Self.title)
                 .environmentObject(ArticleSource(reader: ProofReader(), articleService: ArticleService()))
                 .previewDevice(PreviewDevice(rawValue: "iPhone 13 Pro Max"))
-            ArticlesListView()
+            ArticlesListView(title: Self.title)
                 .environmentObject(ArticleSource(reader: ProofReader(), articleService: ArticleService()))
                 .previewDevice(PreviewDevice(rawValue: "iPhone SE (3rd generation)"))
         }

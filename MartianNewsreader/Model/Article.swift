@@ -1,11 +1,15 @@
 import Foundation
 
 struct Article: Codable, Hashable, Identifiable {
-    let id = UUID()
     let title: String
     let images: [ArticleImage]
     let body: String
     var isBookmarked = false
+    
+    // In the absence of a server/database-generated ID, an article's identity is determined by its title and top image's URL
+    var id: String {
+        title + (topImage?.urlString ?? "")
+    }
     
     private enum CodingKeys : String, CodingKey {
         case title, images, body
@@ -36,11 +40,14 @@ extension Article {
 
 // MARK: - Image
 struct ArticleImage: Codable, Hashable, Identifiable {
-    let id: UUID = UUID()
     let topImage: Bool
     let urlString: String
     let width, height: Int
-
+    
+    var id: String {
+        "\(width) + \(height)" + urlString
+    }
+    
     enum CodingKeys: String, CodingKey {
         case topImage = "top_image"
         case urlString = "url"
@@ -52,7 +59,7 @@ extension ArticleImage {
     static var sample: ArticleImage {
         .init(
             topImage: true,
-            urlString: "https://s1.nyt.com/ios-newsreader/candidates/images/img3.jpg",
+            urlString: "https://s1.nyt.com/ios-newsreader/candidates/images/img4.jpg",
             width: 480,
             height: 262
         )

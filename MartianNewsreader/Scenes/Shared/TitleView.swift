@@ -8,8 +8,10 @@
 import SwiftUI
 
 struct TitleView: View {
+    let title: String
+    
     var body: some View {
-        Text("Martian News")
+        Text(title)
             .fontWeight(.bold)
             .font(.system(.title, design: .rounded))
             .foregroundStyle(
@@ -24,6 +26,6 @@ struct TitleView: View {
 
 struct TitleView_Previews: PreviewProvider {
     static var previews: some View {
-        TitleView()
+        TitleView(title: "Martian News")
     }
 }

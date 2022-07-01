@@ -8,8 +8,16 @@
 import SwiftUI
 
 struct CurrentDateView: View {
+    
     var body: some View {
-        Text(Date().description)
+        Text(
+            Date()
+                .formatted(
+                    .dateTime
+                        .month()
+                        .day()
+                )
+        )
     }
 }
 
