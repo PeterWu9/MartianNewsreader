@@ -13,8 +13,10 @@ struct ArticlesListView: View {
     
     let title: String
     
-    private let scale: Double = 3.0
-    private let padding: Double = 24.0
+    private enum Constant {
+        static let scale: Double = 3.0
+        static let padding: Double = 24.0
+    }
     
     var body: some View {
         GeometryReader { geometry in
@@ -24,7 +26,8 @@ struct ArticlesListView: View {
                         
                     case .isLoading:
                         Spacer()
-                        LoadingView(scale: scale)
+                            .frame(height: Constant.padding)
+                        LoadingView(scale: Constant.scale)
                         .listRowSeparator(.hidden)
                         
                     case .completeLoading:

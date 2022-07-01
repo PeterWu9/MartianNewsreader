@@ -16,6 +16,7 @@ struct LoadingView: View {
             ProgressView()
                 .scaleEffect(.init(scale), anchor: .center)
                 .progressViewStyle(CircularProgressViewStyle(tint: .pink))
+                .padding()
             Spacer()
         }
     }
