@@ -18,15 +18,28 @@ protocol ArticleServiceProvider {
     func fetchArticles() async throws -> Articles
 }
 
+protocol StorageProvider {
+    associatedtype Key: Hashable
+    associatedtype Value
+    typealias Data = [Key: Value]
+    func save(_ data: Data)
+    func retrieveData(for key: Key)
+}
+
 // MARK: ViewModel
 @MainActor
-final class ArticleSource<ProofReader: ArticleProofReader, ArticleService: ArticleServiceProvider>: ObservableObject, Identifiable {
+final class ArticleSource<
+    ProofReader: ArticleProofReader,
+    Storage: StorageProvider,
+    ArticleService: ArticleServiceProvider
+>: ObservableObject, Identifiable {
     
     @Published private(set) var articles: Articles = []
     @Published private(set) var bookmarkedArticles: Articles = []
     @Published private(set) var loadingState: LoadingState = .isLoading
 
     private let reader: ProofReader
+    private let storage: Storage
     private let articleService: ArticleService
     
     enum LoadingState {
@@ -36,9 +49,14 @@ final class ArticleSource<ProofReader: ArticleProofReader, ArticleService: Artic
     }
 
         
-    init(reader: ProofReader, articleService: ArticleService) {
+    init(
+        reader: ProofReader,
+        articleService: ArticleService,
+        storage: Storage
+    ) {
         self.reader = reader
         self.articleService = articleService
+        self.storage = storage
         
         Task {
             do {
@@ -67,6 +85,7 @@ final class ArticleSource<ProofReader: ArticleProofReader, ArticleService: Artic
                 articles.append(loadedArticle)
             }
         }
+        // TODO:  For each article, retrieve from storage and update bookmark data
     }
     
     private func proofRead(_ article: Article) async throws -> Article {
