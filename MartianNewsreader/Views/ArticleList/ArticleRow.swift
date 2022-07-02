@@ -21,7 +21,10 @@ struct ArticleRow: View {
                 imageUrl: article.topImage?.url,
                 width: width
             )
-            ArticleTitleView(title: article.title, bottomPadding: Constant.bottomPadding)
+            ArticleTitleView(
+                title: article.title,
+                bottomPadding: Constant.bottomPadding
+            )
         }
         .padding([.top])
     }

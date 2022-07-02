@@ -21,6 +21,7 @@ struct BookmarkedArticleList: View {
                 Text(subtitle)
                     .font(.system(.headline))
                     .listRowSeparator(.hidden)
+                
                 ForEach(source.bookmarkedArticles) { article in
                     HStack {
                         ArticleAsyncImage(

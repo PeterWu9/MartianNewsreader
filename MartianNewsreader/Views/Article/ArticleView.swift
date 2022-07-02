@@ -33,6 +33,7 @@ struct ArticleView: View {
                     )
                     Spacer()
                         .frame(height: Constant.imageBottomSpaceHeight)
+                    
                     Text(article.body)
                 }
                 .padding([.leading, .trailing])

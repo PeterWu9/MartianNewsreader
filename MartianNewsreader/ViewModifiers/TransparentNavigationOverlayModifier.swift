@@ -18,17 +18,15 @@ struct TransparentNavigationOverlayModifier<Item: Identifiable, Destination: Vie
     }
     
     func body(content: Content) -> some View {
-        (
-            content
-                .overlay(
-                    NavigationLink(
-                        destination: {
-                            destination(item)
-                        },
-                        label: { EmptyView() }
-                    )
-                    .opacity(0)
+        content
+            .overlay(
+                NavigationLink(
+                    destination: {
+                        destination(item)
+                    },
+                    label: { EmptyView() }
                 )
-        )
+                .opacity(0)
+            )
     }
 }
