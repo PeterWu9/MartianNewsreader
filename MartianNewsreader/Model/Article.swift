@@ -4,7 +4,6 @@ struct Article: Codable, Hashable, Identifiable {
     let title: String
     let images: [ArticleImage]
     let body: String
-    var isBookmarked = false
     
     // In the absence of a server/database-generated ID, an article's identity is determined by its title and top image's URL
     var id: String {

@@ -16,14 +16,15 @@ protocol ArticleProofReader {
 
 protocol ArticleServiceProvider {
     func fetchArticles() async throws -> Articles
+    func bookmark(_ article: Article, save: Bool) async throws -> Articles
 }
 
 protocol StorageProvider {
     associatedtype Key: Hashable
     associatedtype Value
-    typealias Data = [Key: Value]
-    func save(_ data: Data) async
-    func retrieveData(for key: Key) async
+    typealias StorageData = [Key: Value]
+    func save(_ data: StorageData) async throws
+    func retrieveData(for key: Key) async throws -> Value
 }
 
 // MARK: ViewModel
@@ -37,6 +38,12 @@ final class ArticleSource<
     @Published private(set) var articles: Articles = []
     @Published private(set) var bookmarkedArticles: Articles = []
     @Published private(set) var loadingState: LoadingState = .isLoading
+    
+    private var bookmarkedStorage: Set<Article> = [] {
+        didSet {
+            bookmarkedArticles = Articles(bookmarkedStorage)
+        }
+    }
 
     private let reader: ProofReader
     private let storage: Storage
@@ -47,7 +54,6 @@ final class ArticleSource<
         case completeLoading
         case hasLoadingError(Error)
     }
-
         
     init(
         reader: ProofReader,
@@ -103,14 +109,13 @@ enum ArticleSourceError: Error, LocalizedError {
 
 // MARK: User Actions
 extension ArticleSource {
-    func bookmarkButtonTapped(_ article: Article) throws {
-        guard let index = articles.firstIndex(of: article) else {
-            throw ArticleSourceError.invalidArticleIndex
-        }
-        articles[index].isBookmarked.toggle()
-        // TODO: Implement saving bookmarked articles data store (which should be async operation on a database actor
-        
-        bookmarkedArticles = articles.filter { $0.isBookmarked }
+    func isBookmarked(for article: Article) -> Bool {
+        bookmarkedStorage.contains(article)
+    }
+    
+    func bookmarkButtonTapped(_ article: Article) async throws {
+        let bookmarked = try await articleService.bookmark(article, save: !isBookmarked(for: article))
+        bookmarkedStorage = Set(bookmarked)
     }
 }
 

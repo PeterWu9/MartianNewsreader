@@ -49,11 +49,12 @@ struct ArticleView: View {
                     Button {
                         // TODO:  Implement error view for bookmark operation failure
                         // If bookmark operation does not succeed, user will know because the button image won't change
-                        try? source.bookmarkButtonTapped(article)
+                        Task {
+                            try? await source.bookmarkButtonTapped(article)
+                        }
                     } label: {
-                        Image(systemName: article.isBookmarked ? "bookmark.fill" : "bookmark")
+                        Image(systemName: source.isBookmarked(for: article) ? "bookmark.fill" : "bookmark")
                     }
-
                 }
             }
         }
