@@ -23,8 +23,11 @@ struct BookmarkedArticleList: View {
                     .listRowSeparator(.hidden)
                 ForEach(source.bookmarkedArticles) { article in
                     HStack {
-                        ArticleAsyncImage(article: article, width: imageWidth, maxHeight: imageWidth)
-                            .cornerRadius(imageCornerRadius)
+                        ArticleAsyncImage(
+                            imageUrl: article.topImage?.url,
+                            width: imageWidth, maxHeight: imageWidth
+                        )
+                        .cornerRadius(imageCornerRadius)
                         Text(article.title)
                     }
                     .overlay(

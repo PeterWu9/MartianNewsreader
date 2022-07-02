@@ -23,21 +23,7 @@ struct ArticleView: View {
                         .font(Font.system(.title, design: .serif))
                         .padding([.bottom])
                     
-                    if let url = article.topImage?.url {
-                        AsyncImage(url: url) { phase in
-                            if let image = phase.image {
-                                image // Displays the loaded image.
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: geometry.size.width * 0.9)
-                                    .clipped()
-                            } else {
-                                Color.gray
-                            }
-                        }
-                    } else {
-                        // TODO: Generic news headline image
-                    }
+                    ArticleAsyncImage(imageUrl: article.topImage?.url, width: geometry.size.width * 0.9 )
                     Spacer()
                         .frame(height: 24)
                     Text(article.body)

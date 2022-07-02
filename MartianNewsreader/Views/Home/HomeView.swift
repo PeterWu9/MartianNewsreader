@@ -39,6 +39,9 @@ struct HomeView: View {
                 }
                 .tag(Tab.bookmarks)
         }
+        .task {
+            try? await articleSource.fetchArticles()
+        }
     }
 }
 

@@ -74,13 +74,9 @@ struct ArticlesListView: View {
                 .onAppear {
                     UIRefreshControl.appearance().tintColor = .systemPink
                 }
-                .refreshable(action: {
-                    try? await source.fetchArticles()
-                })
-                .task {
+                .refreshable {
                     try? await source.fetchArticles()
                 }
-
             }
         }
     }

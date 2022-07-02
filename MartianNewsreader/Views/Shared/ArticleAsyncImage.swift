@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ArticleAsyncImage: View {
-    let article: Article
+    let imageUrl: URL?
     let width: Double
     let maxHeight: Double
     
@@ -16,16 +16,14 @@ struct ArticleAsyncImage: View {
         static let errorImageName = "photo"
     }
     
-    init(article: Article, width: Double, maxHeight: Double = 200) {
-        self.article = article
+    init(imageUrl: URL?, width: Double, maxHeight: Double = 200) {
+        self.imageUrl = imageUrl
         self.width = width
         self.maxHeight = maxHeight
     }
     
     var body: some View {
-        if
-            let articleImage = article.topImage,
-            let url = articleImage.url {
+        if let url = imageUrl {
             
             AsyncImage(url: url) { phase in
                 switch phase {
@@ -62,6 +60,6 @@ struct ArticleAsyncImage: View {
 
 struct ArticleAsyncImage_Previews: PreviewProvider {
     static var previews: some View {
-        ArticleAsyncImage(article: Article.sample, width: 400, maxHeight: 300)
+        ArticleAsyncImage(imageUrl: Article.sample.topImage?.url, width: 400, maxHeight: 300)
     }
 }

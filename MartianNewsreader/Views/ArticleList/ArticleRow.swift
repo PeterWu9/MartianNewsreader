@@ -13,7 +13,10 @@ struct ArticleRow: View {
     
     var body: some View {
         VStack{
-            ArticleAsyncImage(article: article, width: width)
+            ArticleAsyncImage(
+                imageUrl: article.topImage?.url,
+                width: width
+            )
             
             Text(article.title)
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
