@@ -11,7 +11,8 @@ import SwiftUI
 struct MartianNewsreaderApp: App {
     @StateObject var newsFetcher = ArticleSource(
         reader: ProofReader(),
-        articleService: ArticleService()
+        articleService: ArticleService(),
+        storage: Storage()
     )
     
     var body: some Scene {

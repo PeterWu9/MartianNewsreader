@@ -22,8 +22,8 @@ protocol StorageProvider {
     associatedtype Key: Hashable
     associatedtype Value
     typealias Data = [Key: Value]
-    func save(_ data: Data)
-    func retrieveData(for key: Key)
+    func save(_ data: Data) async
+    func retrieveData(for key: Key) async
 }
 
 // MARK: ViewModel

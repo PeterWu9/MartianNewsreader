@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ArticlesListView: View {
     
-    @EnvironmentObject var articlesFetcher: ArticleSource<ProofReader, ArticleService>
+    @EnvironmentObject var articlesFetcher: ArticleSource<ProofReader, Storage, ArticleService>
     
     let title: String
     
@@ -83,14 +83,15 @@ struct ArticlesListView: View {
 }
 
 struct ArticlesListView_Previews: PreviewProvider {
+    static let source = ArticleSource(reader: ProofReader(), articleService: ArticleService(), storage: Storage())
     static let title = "Today's News"
     static var previews: some View {
         Group {
             ArticlesListView(title: Self.title)
-                .environmentObject(ArticleSource(reader: ProofReader(), articleService: ArticleService()))
+                .environmentObject(source)
                 .previewDevice(PreviewDevice(rawValue: "iPhone 13 Pro Max"))
             ArticlesListView(title: Self.title)
-                .environmentObject(ArticleSource(reader: ProofReader(), articleService: ArticleService()))
+                .environmentObject(source)
                 .previewDevice(PreviewDevice(rawValue: "iPhone SE (3rd generation)"))
         }
     }

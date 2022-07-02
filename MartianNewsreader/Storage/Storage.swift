@@ -7,6 +7,16 @@
 
 import Foundation
 
-final class Storage {
+actor Storage: StorageProvider {
+    typealias Key = String
+    typealias Value = Articles
+    typealias Data = [Key: Value]
     
+    func save(_ data: Data) async {
+        fatalError()
+    }
+    
+    func retrieveData(for key: String) async {
+        fatalError()
+    }
 }

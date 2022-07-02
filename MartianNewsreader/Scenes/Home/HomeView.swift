@@ -23,7 +23,7 @@ struct HomeView: View {
         case bookmarks = "Bookmarks"
     }
     
-    @EnvironmentObject var articleSource: ArticleSource<ProofReader, ArticleService>
+    @EnvironmentObject var articleSource: ArticleSource<ProofReader, Storage, ArticleService>
     
     var body: some View {
         TabView(selection: $selection) {
@@ -43,8 +43,9 @@ struct HomeView: View {
 }
 
 struct HomeView_Previews: PreviewProvider {
+    static let source = ArticleSource(reader: ProofReader(), articleService: ArticleService(), storage: Storage())
     static var previews: some View {
         HomeView()
-            .environmentObject(ArticleSource(reader: ProofReader(), articleService: ArticleService()))
+            .environmentObject(source)
     }
 }

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct BookmarkedArticleList: View {
     
-    @EnvironmentObject var articleSource: ArticleSource<ProofReader, ArticleService>
+    @EnvironmentObject var articleSource: ArticleSource<ProofReader, Storage, ArticleService>
     let title: String
     let subtitle: String
     private let imageWidth = 50.0
@@ -50,15 +50,11 @@ struct BookmarkedArticleList: View {
 }
 
 struct BookmarkedArticleList_Previews: PreviewProvider {
+    static let source = ArticleSource(reader: ProofReader(), articleService: ArticleService(), storage: Storage())
     static let title = "Martian News"
     static let subtitle = "Bookmarks"
     static var previews: some View {
         BookmarkedArticleList(title: title, subtitle: subtitle)
-            .environmentObject(
-                ArticleSource(
-                    reader: ProofReader(),
-                    articleService: ArticleService()
-                )
-            )
+            .environmentObject(source)
     }
 }
