@@ -9,7 +9,7 @@ import SwiftUI
 
 struct BookmarkedArticleList: View {
     
-    @EnvironmentObject var articleSource: ArticleSource
+    @EnvironmentObject var source: ArticleSource
     let title: String
     let subtitle: String
     private let imageWidth = 50.0
@@ -21,7 +21,7 @@ struct BookmarkedArticleList: View {
                 Text(subtitle)
                     .font(.system(.headline))
                     .listRowSeparator(.hidden)
-                ForEach(articleSource.bookmarkedArticles) { article in
+                ForEach(source.bookmarkedArticles) { article in
                     HStack {
                         ArticleAsyncImage(article: article, width: imageWidth, maxHeight: imageWidth)
                             .cornerRadius(imageCornerRadius)
@@ -38,13 +38,7 @@ struct BookmarkedArticleList: View {
                     )
                 }
             }
-            .listStyle(.plain)
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .principal) {
-                    TitleView(title: title)
-                }
-            }
+            .listTitleStyle(title: title)
         }
     }
 }

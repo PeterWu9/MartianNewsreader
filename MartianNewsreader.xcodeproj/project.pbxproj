@@ -16,6 +16,8 @@
 		F92F876E2867B6B9008A681E /* ArticleSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F92F876D2867B6B8008A681E /* ArticleSource.swift */; };
 		F9394033286E7A6F008B5C73 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9394032286E7A6E008B5C73 /* LoadingView.swift */; };
 		F9394036286E8658008B5C73 /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9394035286E8658008B5C73 /* StorageService.swift */; };
+		F939403B2871030E008B5C73 /* ListModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = F939403A2871030E008B5C73 /* ListModifier.swift */; };
+		F939403D28710339008B5C73 /* View+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F939403C28710338008B5C73 /* View+.swift */; };
 		F93BEB882867C262005ACB2E /* ArticleRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93BEB872867C262005ACB2E /* ArticleRow.swift */; };
 		F94EF34F286B88E60087992F /* Articles.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94EF34E286B88E60087992F /* Articles.swift */; };
 		F94EF357286BB3AE0087992F /* ProofReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94EF356286BB3AE0087992F /* ProofReader.swift */; };
@@ -41,6 +43,8 @@
 		F92F876D2867B6B8008A681E /* ArticleSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleSource.swift; sourceTree = "<group>"; };
 		F9394032286E7A6E008B5C73 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		F9394035286E8658008B5C73 /* StorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageService.swift; sourceTree = "<group>"; };
+		F939403A2871030E008B5C73 /* ListModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListModifier.swift; sourceTree = "<group>"; };
+		F939403C28710338008B5C73 /* View+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+.swift"; sourceTree = "<group>"; };
 		F93BEB872867C262005ACB2E /* ArticleRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleRow.swift; sourceTree = "<group>"; };
 		F94EF34E286B88E60087992F /* Articles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Articles.swift; sourceTree = "<group>"; };
 		F94EF356286BB3AE0087992F /* ProofReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProofReader.swift; sourceTree = "<group>"; };
@@ -91,10 +95,11 @@
 		F92F87572867AE77008A681E /* MartianNewsreader */ = {
 			isa = PBXGroup;
 			children = (
+				F939403928710251008B5C73 /* ViewModifiers */,
 				F92F87582867AE77008A681E /* MartianNewsreaderApp.swift */,
 				F9627CDA286BCA93002688D7 /* Services */,
 				F92F87682867B163008A681E /* Model */,
-				F9627D01286D6298002688D7 /* Scenes */,
+				F9627D01286D6298002688D7 /* Views */,
 				F92F875E2867AE7B008A681E /* Preview Content */,
 				F9627CD7286BC1E8002688D7 /* SupportingFiles */,
 			);
@@ -117,6 +122,15 @@
 				F94EF34E286B88E60087992F /* Articles.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		F939403928710251008B5C73 /* ViewModifiers */ = {
+			isa = PBXGroup;
+			children = (
+				F939403C28710338008B5C73 /* View+.swift */,
+				F939403A2871030E008B5C73 /* ListModifier.swift */,
+			);
+			path = ViewModifiers;
 			sourceTree = "<group>";
 		};
 		F94EF35A286BB4630087992F /* Frameworks */ = {
@@ -145,7 +159,7 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
-		F9627D01286D6298002688D7 /* Scenes */ = {
+		F9627D01286D6298002688D7 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				F9627D08286D6778002688D7 /* Shared */,
@@ -154,7 +168,7 @@
 				F9627D04286D62F8002688D7 /* Article */,
 				F9627D05286D651B002688D7 /* BookmarkedArticles */,
 			);
-			path = Scenes;
+			path = Views;
 			sourceTree = "<group>";
 		};
 		F9627D02286D62A4002688D7 /* Home */ = {
@@ -283,11 +297,13 @@
 				F92F875B2867AE77008A681E /* ArticlesListView.swift in Sources */,
 				F9394033286E7A6F008B5C73 /* LoadingView.swift in Sources */,
 				F9627D07286D653F002688D7 /* BookmarkedArticleList.swift in Sources */,
+				F939403D28710339008B5C73 /* View+.swift in Sources */,
 				F94EF357286BB3AE0087992F /* ProofReader.swift in Sources */,
 				F9953A2F2868DDF9003D0062 /* ArticleView.swift in Sources */,
 				F9627CE9286CD26A002688D7 /* CurrentDateView.swift in Sources */,
 				F92F87672867B0C9008A681E /* Article.swift in Sources */,
 				F92F87592867AE77008A681E /* MartianNewsreaderApp.swift in Sources */,
+				F939403B2871030E008B5C73 /* ListModifier.swift in Sources */,
 				F9627CE7286CC74A002688D7 /* LoadingErrorView.swift in Sources */,
 				F93BEB882867C262005ACB2E /* ArticleRow.swift in Sources */,
 				F90A2E6C286843FD00DF0405 /* ArticleAsyncImage.swift in Sources */,

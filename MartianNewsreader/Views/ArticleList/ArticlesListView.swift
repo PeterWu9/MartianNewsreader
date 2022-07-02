@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ArticlesListView: View {
     
-    @EnvironmentObject var articlesFetcher: ArticleSource
+    @EnvironmentObject var source: ArticleSource
     
     let title: String
     
@@ -22,7 +22,7 @@ struct ArticlesListView: View {
         GeometryReader { geometry in
             NavigationView {
                 List {
-                    switch articlesFetcher.loadingState {
+                    switch source.loadingState {
                         
                     case .isLoading:
                         Spacer()
@@ -37,19 +37,19 @@ struct ArticlesListView: View {
                             .listRowInsets(EdgeInsets())
                             .padding([.leading])
                         
-                        ForEach(articlesFetcher.articles) { article in
+                        ForEach(source.articles) { article in
                             ArticleRow(
                                 article: article,
                                 width: geometry.size.width
                             )
                             .padding([.bottom])
+                            
                             .listRowInsets(EdgeInsets())
                             // Enables navigation to article detail view but hides the disclosure button
                             .overlay(
                                 NavigationLink(
                                     destination: {
                                         ArticleView(article: article)
-                                            .environmentObject(articlesFetcher)
                                     },
                                     label: { EmptyView() }
                                 )
@@ -70,21 +70,15 @@ struct ArticlesListView: View {
                         .listRowInsets(EdgeInsets())
                     }
                 }
-                .listStyle(.plain)
-                .navigationBarTitleDisplayMode(.inline)
-                .toolbar {
-                    ToolbarItem(placement: .principal) {
-                        TitleView(title: title)
-                    }
-                }
+                .listTitleStyle(title: title)
                 .onAppear {
                     UIRefreshControl.appearance().tintColor = .systemPink
                 }
                 .refreshable(action: {
-                    try? await articlesFetcher.fetchArticles()
+                    try? await source.fetchArticles()
                 })
                 .task {
-                    try? await articlesFetcher.fetchArticles()
+                    try? await source.fetchArticles()
                 }
 
             }
