@@ -11,7 +11,7 @@ struct ArticleView: View {
     
     let article: Article
     
-    @EnvironmentObject var source: ArticleSource<ProofReader, Storage, ArticleService>
+    @EnvironmentObject var source: ArticleSource
     
     var body: some View {
         GeometryReader { geometry in

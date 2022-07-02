@@ -9,11 +9,7 @@ import SwiftUI
 
 @main
 struct MartianNewsreaderApp: App {
-    @StateObject var newsFetcher = ArticleSource(
-        reader: ProofReader(),
-        articleService: ArticleService(),
-        storage: Storage()
-    )
+    @StateObject var newsFetcher = ArticleSource()
     
     var body: some Scene {
         WindowGroup {

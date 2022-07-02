@@ -7,33 +7,9 @@
 
 import Foundation
 
-// MARK: Dependencies
-protocol ArticleProofReader {
-    init()
-    // Proof reading may be an asynchronous operation (could be services performed over network or a potentially long-running background operation)
-    func proofRead(_ article: Article) async throws -> String
-}
-
-protocol ArticleServiceProvider {
-    func fetchArticles() async throws -> Articles
-    func bookmark(_ article: Article, save: Bool) async throws -> Articles
-}
-
-protocol StorageProvider {
-    associatedtype Key: Hashable
-    associatedtype Value
-    typealias StorageData = [Key: Value]
-    func save(_ data: StorageData) async throws
-    func retrieveData(for key: Key) async throws -> Value
-}
-
 // MARK: ViewModel
 @MainActor
-final class ArticleSource<
-    ProofReader: ArticleProofReader,
-    Storage: StorageProvider,
-    ArticleService: ArticleServiceProvider
->: ObservableObject, Identifiable {
+final class ArticleSource: ObservableObject, Identifiable {
     
     @Published private(set) var articles: Articles = []
     @Published private(set) var bookmarkedArticles: Articles = []
@@ -45,9 +21,8 @@ final class ArticleSource<
         }
     }
 
-    private let reader: ProofReader
-    private let storage: Storage
-    private let articleService: ArticleService
+    private let reader: ProofReader = ProofReader()
+    private let articleService = ArticleService<StorageService>(baseUrlString: "https://s1.nyt.com/ios-newsreader/candidates/test/articles.json")
     
     enum LoadingState {
         case isLoading
@@ -55,15 +30,7 @@ final class ArticleSource<
         case hasLoadingError(Error)
     }
         
-    init(
-        reader: ProofReader,
-        articleService: ArticleService,
-        storage: Storage
-    ) {
-        self.reader = reader
-        self.articleService = articleService
-        self.storage = storage
-        
+    init() {
         Task {
             do {
                 loadingState = .isLoading
@@ -91,7 +58,6 @@ final class ArticleSource<
                 articles.append(loadedArticle)
             }
         }
-        // TODO:  For each article, retrieve from storage and update bookmark data
     }
     
     private func proofRead(_ article: Article) async throws -> Article {
@@ -114,7 +80,7 @@ extension ArticleSource {
     }
     
     func bookmarkButtonTapped(_ article: Article) async throws {
-        let bookmarked = try await articleService.bookmark(article, save: !isBookmarked(for: article))
+        let bookmarked = await articleService.bookmark(article, save: !isBookmarked(for: article))
         bookmarkedStorage = Set(bookmarked)
     }
 }

@@ -7,36 +7,32 @@
 
 import Foundation
 
-actor Storage: StorageProvider {
-    typealias Key = String
-    typealias Value = Articles
+actor StorageService<StorageKey, Value>: StorageServiceProvider where StorageKey: Codable & Hashable, Value: Codable {
+    
+    typealias Key = StorageKey
+    typealias Value = Value
     typealias StorageData = [Key: Value]
     
-    static let shared = Storage()
-    
-    private enum Constant {
-        static let defaultKey = "saved"
-    }
-    
+    private let defaultKey = "saved"
     private let storage = UserDefaults.standard
     private let encoder = PropertyListEncoder()
     private let decoder = PropertyListDecoder()
     
     func save(_ data: StorageData) async throws {
         let encoded = try encoder.encode(data)
-        storage.set(encoded, forKey: Constant.defaultKey)
+        storage.set(encoded, forKey: defaultKey)
     }
     
-    func retrieveData(for key: Key) async throws -> Articles {
+    func retrieveData(for key: StorageKey) async throws -> Value {
         guard
-            let data = storage.object(forKey: Constant.defaultKey) as? Data,
+            let data = storage.object(forKey: defaultKey) as? Data,
             let decoded = try? decoder.decode(StorageData.self, from: data),
-            let articles = decoded[key] else {
+            let items = decoded[key] else {
             throw StorageError.retrieveDataError
         }
-        return articles
+        return items
     }
-    
+
     enum StorageError: Error, LocalizedError {
         case retrieveDataError
     }

@@ -8,7 +8,13 @@
 import Foundation
 import ProofReadingLibrary
 
-final class ProofReader: ArticleProofReader {
+protocol ProofReadingServiceProvider {
+    init()
+    // Proof reading may be an asynchronous operation (could be services performed over network or a potentially long-running background operation)
+    func proofRead(_ article: Article) async throws -> String
+}
+
+actor ProofReader: ProofReadingServiceProvider {
     func proofRead(_ article: Article) async throws -> String {
         return ProofRead.checkParagraphAndSentenceFragment(for: article.body)
     }
