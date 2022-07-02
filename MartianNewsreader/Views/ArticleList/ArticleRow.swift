@@ -11,18 +11,17 @@ struct ArticleRow: View {
     let article: Article
     let width: Double
     
+    private enum Constant {
+        static let bottomPadding: Double = 8
+    }
+    
     var body: some View {
         VStack{
             ArticleAsyncImage(
                 imageUrl: article.topImage?.url,
                 width: width
             )
-            
-            Text(article.title)
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
-                .lineLimit(nil)
-                .font(Font.system(.title, design: .serif))
-                .padding([.leading, .bottom, .trailing], 8)
+            ArticleTitleView(title: article.title, bottomPadding: Constant.bottomPadding)
         }
         .padding([.top])
     }

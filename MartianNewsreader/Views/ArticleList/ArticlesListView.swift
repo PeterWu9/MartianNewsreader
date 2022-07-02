@@ -43,7 +43,6 @@ struct ArticlesListView: View {
                                 width: geometry.size.width
                             )
                             .padding([.bottom])
-                            
                             .listRowInsets(EdgeInsets())
                             // Enables navigation to article detail view but hides the disclosure button
                             .overlay(
@@ -58,7 +57,6 @@ struct ArticlesListView: View {
                         }
                         
                     case .hasLoadingError(let error):
-                        // TODO: Add description for pull to refresh to try again
                         Spacer()
                         HStack {
                             Spacer()

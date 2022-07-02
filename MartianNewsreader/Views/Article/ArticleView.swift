@@ -13,17 +13,22 @@ struct ArticleView: View {
     
     @EnvironmentObject var source: ArticleSource
     
+    private enum Constant {
+        static let bottomPadding: Double = 0
+    }
+    
     var body: some View {
         GeometryReader { geometry in
             ScrollView {
                 VStack {
-                    Text(article.title)
-                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
-                        .lineLimit(nil)
-                        .font(Font.system(.title, design: .serif))
-                        .padding([.bottom])
-                    
-                    ArticleAsyncImage(imageUrl: article.topImage?.url, width: geometry.size.width * 0.9 )
+                    ArticleTitleView(
+                        title: article.title,
+                        bottomPadding: Constant.bottomPadding
+                    )
+                    ArticleAsyncImage(
+                        imageUrl: article.topImage?.url,
+                        width: geometry.size.width * 0.9
+                    )
                     Spacer()
                         .frame(height: 24)
                     Text(article.body)
