@@ -30,33 +30,29 @@ final class ArticleSource: ObservableObject {
         case hasLoadingError(Error)
     }
         
-    init() {
-        Task {
-            do {
-                loadingState = .isLoading
-                try await fetchArticles()
-                loadingState = .completeLoading
-            } catch {
-                loadingState = .hasLoadingError(error)
-            }
-        }
-    }
-        
     func fetchArticles() async throws {
-        
-        let fetchedArticles = try await articleService.fetchArticles()
-        
-        articles = try await withThrowingTaskGroup(of: Article.self) { group in
-            for article in fetchedArticles {
-                group.addTask {
-                    // Allows strong self capture because self won't outlive the scope of throwing task group closure
-                    try await self.proofRead(article)
+        do {
+            loadingState = .isLoading
+            
+            let fetchedArticles = try await articleService.fetchArticles()
+            
+            articles = try await withThrowingTaskGroup(of: Article.self) { group in
+                for article in fetchedArticles {
+                    group.addTask {
+                        // Allows strong self capture because self won't outlive the scope of throwing task group closure
+                        try await self.proofRead(article)
+                    }
+                }
+                
+                return try await group.reduce(into: Articles()) { articles, loadedArticle in
+                    articles.append(loadedArticle)
                 }
             }
-            
-            return try await group.reduce(into: Articles()) { articles, loadedArticle in
-                articles.append(loadedArticle)
-            }
+
+            loadingState = .completeLoading
+        } catch {
+            loadingState = .hasLoadingError(error)
+            throw error
         }
     }
     

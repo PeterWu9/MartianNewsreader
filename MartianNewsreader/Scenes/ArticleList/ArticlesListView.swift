@@ -77,6 +77,16 @@ struct ArticlesListView: View {
                         TitleView(title: title)
                     }
                 }
+                .onAppear {
+                    UIRefreshControl.appearance().tintColor = .systemPink
+                }
+                .refreshable(action: {
+                    try? await articlesFetcher.fetchArticles()
+                })
+                .task {
+                    try? await articlesFetcher.fetchArticles()
+                }
+
             }
         }
     }
