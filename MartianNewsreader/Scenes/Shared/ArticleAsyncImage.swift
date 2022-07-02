@@ -44,7 +44,6 @@ struct ArticleAsyncImage: View {
                 }
             }
         } else {
-            // TODO: Generic news headline image
             Image(systemName: Constant.errorImageName)
         }
     }

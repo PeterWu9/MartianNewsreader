@@ -47,10 +47,9 @@ struct ArticleView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
-                        // TODO:  Implement error view for bookmark operation failure
                         // If bookmark operation does not succeed, user will know because the button image won't change
                         Task {
-                            try? await source.bookmarkButtonTapped(article)
+                            try? await source.bookmarkButtonTapped(on: article)
                         }
                     } label: {
                         Image(systemName: source.isBookmarked(for: article) ? "bookmark.fill" : "bookmark")

@@ -9,7 +9,7 @@ import Foundation
 
 // MARK: ViewModel
 @MainActor
-final class ArticleSource: ObservableObject, Identifiable {
+final class ArticleSource: ObservableObject {
     
     @Published private(set) var articles: Articles = []
     @Published private(set) var bookmarkedArticles: Articles = []
@@ -21,7 +21,7 @@ final class ArticleSource: ObservableObject, Identifiable {
         }
     }
 
-    private let reader: ProofReader = ProofReader()
+    private let readerService = ProofReaderService()
     private let articleService = ArticleService<StorageService>(baseUrlString: "https://s1.nyt.com/ios-newsreader/candidates/test/articles.json")
     
     enum LoadingState {
@@ -64,7 +64,7 @@ final class ArticleSource: ObservableObject, Identifiable {
         return try await Article(
             title: article.title,
             images: article.images,
-            body: reader.proofRead(article)
+            body: readerService.proofRead(article)
         )
     }
 }
@@ -73,13 +73,13 @@ enum ArticleSourceError: Error, LocalizedError {
     case invalidArticleIndex
 }
 
-// MARK: User Actions
+// MARK: Bookmarks
 extension ArticleSource {
     func isBookmarked(for article: Article) -> Bool {
         bookmarkedStorage.contains(article)
     }
     
-    func bookmarkButtonTapped(_ article: Article) async throws {
+    func bookmarkButtonTapped(on article: Article) async throws {
         let bookmarked = await articleService.bookmark(article, save: !isBookmarked(for: article))
         bookmarkedStorage = Set(bookmarked)
     }

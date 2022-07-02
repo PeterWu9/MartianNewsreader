@@ -9,6 +9,7 @@ import SwiftUI
 
 struct HomeView: View {
     
+    @EnvironmentObject var articleSource: ArticleSource
     @State private var selection: Tab = .today
     
     enum Constant {
@@ -23,7 +24,6 @@ struct HomeView: View {
         case bookmarks = "Bookmarks"
     }
     
-    @EnvironmentObject var articleSource: ArticleSource
     
     var body: some View {
         TabView(selection: $selection) {

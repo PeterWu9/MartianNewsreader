@@ -14,7 +14,7 @@ protocol ProofReadingServiceProvider {
     func proofRead(_ article: Article) async throws -> String
 }
 
-actor ProofReader: ProofReadingServiceProvider {
+actor ProofReaderService: ProofReadingServiceProvider {
     func proofRead(_ article: Article) async throws -> String {
         return ProofRead.checkParagraphAndSentenceFragment(for: article.body)
     }
