@@ -15,6 +15,8 @@ struct ArticleView: View {
     
     private enum Constant {
         static let bottomPadding: Double = 0
+        static let imageBottomSpaceHeight: Double = 24
+        static let imageWidthScale: Double = 0.9
     }
     
     var body: some View {
@@ -27,10 +29,10 @@ struct ArticleView: View {
                     )
                     ArticleAsyncImage(
                         imageUrl: article.topImage?.url,
-                        width: geometry.size.width * 0.9
+                        width: geometry.size.width * Constant.imageWidthScale
                     )
                     Spacer()
-                        .frame(height: 24)
+                        .frame(height: Constant.imageBottomSpaceHeight)
                     Text(article.body)
                 }
                 .padding([.leading, .trailing])

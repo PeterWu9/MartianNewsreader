@@ -30,15 +30,7 @@ struct BookmarkedArticleList: View {
                         .cornerRadius(imageCornerRadius)
                         Text(article.title)
                     }
-                    .overlay(
-                        NavigationLink(
-                            destination: {
-                                ArticleView(article: article)
-                            },
-                            label: { EmptyView() }
-                        )
-                        .opacity(0)
-                    )
+                    .articleLinkTo(article)
                 }
             }
             .listTitleStyle(title: title)

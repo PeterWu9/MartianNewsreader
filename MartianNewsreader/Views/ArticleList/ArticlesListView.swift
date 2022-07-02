@@ -44,16 +44,7 @@ struct ArticlesListView: View {
                             )
                             .padding([.bottom])
                             .listRowInsets(EdgeInsets())
-                            // Enables navigation to article detail view but hides the disclosure button
-                            .overlay(
-                                NavigationLink(
-                                    destination: {
-                                        ArticleView(article: article)
-                                    },
-                                    label: { EmptyView() }
-                                )
-                                .opacity(0)
-                            )
+                            .articleLinkTo(article)
                         }
                         
                     case .hasLoadingError(let error):

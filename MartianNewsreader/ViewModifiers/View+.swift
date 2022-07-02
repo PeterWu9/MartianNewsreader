@@ -11,4 +11,13 @@ extension View {
     func listTitleStyle(title: String) -> some View {
         modifier(ListTitleModifier(title: title))
     }
+    
+    func articleLinkTo(_ article: Article) -> some View {
+        modifier(
+            TransparentNavigationOverlayModifier(
+                item: article,
+                content: { ArticleView(article: $0) }
+            )
+        )
+    }
 }
