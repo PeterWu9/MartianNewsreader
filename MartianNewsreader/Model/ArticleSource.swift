@@ -36,7 +36,7 @@ final class ArticleSource: ObservableObject {
         do {
             loadingState = .isLoading
             
-            let fetchedArticles = try await articleService.fetchArticles()
+            let fetchedArticles = try await articleService.fetchArticles().sorted { $0.title < $1.title }
             
             articles = try await withThrowingTaskGroup(of: Article.self) { group in
                 
@@ -54,7 +54,6 @@ final class ArticleSource: ObservableObject {
                 return try await group.reduce(into: Articles()) { articles, loadedArticle in
                     articles.append(loadedArticle)
                 }
-                
             }
             loadingState = .completeLoading
         } catch {

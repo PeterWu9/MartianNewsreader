@@ -12,7 +12,7 @@ struct ArticleRow: View {
     let width: Double
     
     private enum Constant {
-        static let bottomPadding: Double = 8
+        static let padding: Double = 8
     }
     
     var body: some View {
@@ -23,8 +23,9 @@ struct ArticleRow: View {
             )
             ArticleTitleView(
                 title: article.title,
-                bottomPadding: Constant.bottomPadding
+                bottomPadding: Constant.padding
             )
+            .padding([.leading, .trailing], Constant.padding)
         }
         .padding([.top])
     }

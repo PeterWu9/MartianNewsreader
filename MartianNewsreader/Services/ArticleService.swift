@@ -31,6 +31,7 @@ actor ArticleService<Storage: StorageServiceProvider>:
 where Storage.Key == String,
       Storage.Value == Articles {
     
+    private var articles = Set<Article>()
     private let baseUrlString: String
     private let networkManager = NetworkingManager.shared
     private let storage = Storage()
@@ -43,11 +44,15 @@ where Storage.Key == String,
     }
     
     func fetchArticles() async throws -> Articles {
-        return try await networkManager.get(url: baseUrlString)
+        self.articles = try await networkManager.get(url: baseUrlString)
+        return Articles(articles)
     }
     
     func loadBookmarkedArticles() async throws -> Articles {
-        return try await storage.retrieveData(for: bookmarkKey)
+        let bookmarkedArticles = Set(
+            try await storage.retrieveData(for: bookmarkKey)
+        )
+        return Articles(articles.intersection(bookmarkedArticles))
     }
     
     func bookmark(_ article: Article, save: Bool) async -> Articles {
