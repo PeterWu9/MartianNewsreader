@@ -12,6 +12,7 @@ struct ArticlesListView: View {
     @EnvironmentObject var source: ArticleSource
     
     let title: String
+    let subtitle: String
     
     private enum Constant {
         static let scale: Double = 3.0
@@ -44,7 +45,7 @@ struct ArticlesListView: View {
                             )
                             .padding([.bottom])
                             .listRowInsets(EdgeInsets())
-                            .articleLinkTo(article)
+                            .articleLinkTo(article, sourceTitle: subtitle)
                         }
                         
                     case .hasLoadingError(let error):
@@ -73,13 +74,14 @@ struct ArticlesListView: View {
 
 struct ArticlesListView_Previews: PreviewProvider {
     static let source = ArticleSource()
-    static let title = "Today's News"
+    static let title = "Martian News"
+    static let listTitle = "Today"
     static var previews: some View {
         Group {
-            ArticlesListView(title: Self.title)
+            ArticlesListView(title: title, subtitle: listTitle)
                 .environmentObject(source)
                 .previewDevice(PreviewDevice(rawValue: "iPhone 13 Pro Max"))
-            ArticlesListView(title: Self.title)
+            ArticlesListView(title: title, subtitle: listTitle)
                 .environmentObject(source)
                 .previewDevice(PreviewDevice(rawValue: "iPhone SE (3rd generation)"))
         }

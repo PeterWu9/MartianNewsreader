@@ -31,7 +31,7 @@ struct BookmarkedArticleList: View {
                         .cornerRadius(imageCornerRadius)
                         Text(article.title)
                     }
-                    .articleLinkTo(article)
+                    .articleLinkTo(article, sourceTitle: subtitle)
                 }
             }
             .listTitleStyle(title: title)

@@ -27,11 +27,14 @@ struct HomeView: View {
     
     var body: some View {
         TabView(selection: $selection) {
-            ArticlesListView(title: Constant.mainTitle)
-                .tabItem {
-                    Label(Tab.today.rawValue, systemImage: Constant.newsPaperImageName)
-                }
-                .tag(Tab.today)
+            ArticlesListView(
+                title: Constant.mainTitle,
+                subtitle: Tab.today.rawValue
+            )
+            .tabItem {
+                Label(Tab.today.rawValue, systemImage: Constant.newsPaperImageName)
+            }
+            .tag(Tab.today)
             
             BookmarkedArticleList(title: Constant.mainTitle, subtitle: Constant.bookmarkSubtitle)
                 .tabItem {

@@ -46,6 +46,10 @@ where Storage.Key == String,
         return try await networkManager.get(url: baseUrlString)
     }
     
+    func loadBookmarkedArticles() async throws -> Articles {
+        return try await storage.retrieveData(for: bookmarkKey)
+    }
+    
     func bookmark(_ article: Article, save: Bool) async -> Articles {
         var saved = Set<Article>(
             (try? await storage.retrieveData(for: bookmarkKey)) ?? Articles()

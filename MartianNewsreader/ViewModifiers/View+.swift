@@ -12,9 +12,10 @@ extension View {
         modifier(ListTitleModifier(title: title))
     }
     
-    func articleLinkTo(_ article: Article) -> some View {
+    func articleLinkTo(_ article: Article, sourceTitle: String) -> some View {
         modifier(
             TransparentNavigationOverlayModifier(
+                previous: sourceTitle,
                 item: article,
                 content: { ArticleView(article: $0) }
             )

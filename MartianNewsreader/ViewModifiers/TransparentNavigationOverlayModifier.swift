@@ -11,8 +11,10 @@ struct TransparentNavigationOverlayModifier<Item: Identifiable, Destination: Vie
     
     private let item: Item
     private let destination: (Item) -> Destination
+    private let previous: String
     
-    init(item: Item, @ViewBuilder content: @escaping (Item) -> Destination) {
+    init(previous: String, item: Item, @ViewBuilder content: @escaping (Item) -> Destination) {
+        self.previous = previous
         self.item = item
         self.destination = content
     }
@@ -26,6 +28,7 @@ struct TransparentNavigationOverlayModifier<Item: Identifiable, Destination: Vie
                     },
                     label: { EmptyView() }
                 )
+                .navigationTitle(previous)
                 .opacity(0)
             )
     }

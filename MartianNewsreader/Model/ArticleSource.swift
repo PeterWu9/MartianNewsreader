@@ -29,39 +29,43 @@ final class ArticleSource: ObservableObject {
         case completeLoading
         case hasLoadingError(Error)
     }
-        
+    
+    /// Loads both articles and bookmarked articles.
+    /// For the articles, each article is proofread for paragraph and punctuation before storage
     func fetchArticles() async throws {
         do {
             loadingState = .isLoading
             
-            let fetchedArticles = try await articleService.fetchArticles()
+            async let bookmarked = articleService.loadBookmarkedArticles()
             
-            articles = try await withThrowingTaskGroup(of: Article.self) { group in
-                for article in fetchedArticles {
+            async let fetchedArticles: Articles = withThrowingTaskGroup(of: Article.self) { group in
+                let articles = try await articleService.fetchArticles()
+                
+                for article in articles {
                     group.addTask {
                         // Allows strong self capture because self won't outlive the scope of throwing task group closure
-                        try await self.proofRead(article)
+                        try await Article(
+                            title: article.title,
+                            images: article.images,
+                            body: self.readerService.proofRead(article)
+                        )
                     }
                 }
                 
                 return try await group.reduce(into: Articles()) { articles, loadedArticle in
                     articles.append(loadedArticle)
                 }
+                
             }
-
+            
+            articles = try await fetchedArticles
+            bookmarkedStorage = Set(try await bookmarked)
+            
             loadingState = .completeLoading
         } catch {
             loadingState = .hasLoadingError(error)
             throw error
         }
-    }
-    
-    private func proofRead(_ article: Article) async throws -> Article {
-        return try await Article(
-            title: article.title,
-            images: article.images,
-            body: readerService.proofRead(article)
-        )
     }
 }
 
