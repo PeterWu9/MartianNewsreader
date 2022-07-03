@@ -22,7 +22,7 @@ struct BookmarkedArticleList: View {
                     .font(.system(.headline))
                     .listRowSeparator(.hidden)
                 
-                ForEach(source.bookmarkedArticles) { article in
+                ForEach(source.articles.filter { $0.isBookmarked }) { article in
                     HStack {
                         ArticleAsyncImage(
                             imageUrl: article.topImage?.url,

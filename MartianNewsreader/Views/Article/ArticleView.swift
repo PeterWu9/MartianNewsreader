@@ -11,6 +11,7 @@ struct ArticleView: View {
     
     let article: Article
     @EnvironmentObject var source: ArticleSource
+    @State private var isBookmarked: Bool = false
     
     private enum Constant {
         static let bottomPadding: Double = 0
@@ -43,10 +44,14 @@ struct ArticleView: View {
                     Button {
                         // If bookmark operation does not succeed, user will know because the button image won't change
                         Task {
-                            try await source.bookmarkButtonTapped(on: article)
+                            do {
+                                try await source.bookmarkTapped(on: article)
+                            } catch {
+                                print(error)
+                            }
                         }
                     } label: {
-                        Image(systemName: source.isBookmarked(for: article) ? "bookmark.fill" : "bookmark")
+                        Image(systemName: article.isBookmarked ? "bookmark.fill" : "bookmark")
                     }
                 }
             }

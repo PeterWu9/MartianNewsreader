@@ -5,6 +5,8 @@ struct Article: Codable, Hashable, Identifiable {
     let images: [ArticleImage]
     let body: String
     
+    // MARK: Client-side only properties
+    var isBookmarked = false
     // In the absence of a server/database-generated ID, an article's identity is determined by its title and top image's URL
     var id: String {
         title + (topImage?.urlString ?? "")
@@ -17,12 +19,6 @@ struct Article: Codable, Hashable, Identifiable {
 
 // MARK: Convenience Accessor/Sample
 extension Article {
-    var topImage: ArticleImage? {
-        images.first { $0.topImage }
-    }
-}
-
-extension Article {
     static var sample: Article {
         .init(
             title: "Curiosity turns 100 today",
@@ -34,8 +30,18 @@ extension Article {
                   """
         )
     }
-}
 
+    var topImage: ArticleImage? {
+        images.first { $0.topImage }
+    }
+    
+    init(_ article: Self, isBookmarked: Bool) {
+        self.title = article.title
+        self.images = article.images
+        self.body = article.body
+        self.isBookmarked = isBookmarked
+    }
+}
 
 // MARK: - Image
 struct ArticleImage: Codable, Hashable, Identifiable {

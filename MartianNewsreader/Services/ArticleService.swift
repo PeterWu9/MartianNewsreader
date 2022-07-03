@@ -10,28 +10,26 @@ import NetworkingLibrary
 
 // MARK: Dependency
 protocol StorageServiceProvider {
-    associatedtype Key: Hashable
     associatedtype Value
-    typealias StorageData = [Key: Value]
     init()
-    func save(_ data: StorageData) async throws
-    func retrieveData(for key: Key) async throws -> Value
+    func save(_ data: Value) async throws
+    func retrieveData() async throws -> Value?
 }
 
 
 // MARK: Service and Implementation
 protocol ArticleServiceProvider {
     func fetchArticles() async throws -> Articles
-    func bookmark(_ article: Article, save: Bool) async throws -> Articles
+    func bookmark(_ article: Article) async throws
+    func undoBookmark(_ article: Article) async throws
 }
 
 actor ArticleService<Storage: StorageServiceProvider>:
     ObservableObject,
     ArticleServiceProvider
-where Storage.Key == String,
-      Storage.Value == Articles {
+where Storage.Value == [String] {
     
-    private var articles = Set<Article>()
+//    private var articles = Set<Article>()
     private let baseUrlString: String
     private let networkManager = NetworkingManager.shared
     private let storage = Storage()
@@ -44,30 +42,35 @@ where Storage.Key == String,
     }
     
     func fetchArticles() async throws -> Articles {
-        self.articles = try await networkManager.get(url: baseUrlString)
-        return Articles(articles)
-    }
-    
-    func loadBookmarkedArticles() async throws -> Articles {
-        let bookmarkedArticles = Set(
-            try await storage.retrieveData(for: bookmarkKey)
-        )
-        return Articles(articles.intersection(bookmarkedArticles))
-    }
-    
-    func bookmark(_ article: Article, save: Bool) async -> Articles {
-        var saved = Set<Article>(
-            (try? await storage.retrieveData(for: bookmarkKey)) ?? Articles()
-        )
-        
-        if save {
-            saved.insert(article)
-        } else {
-            saved.remove(article)
+        let articles: Articles = try await networkManager.get(url: baseUrlString)
+        let saved = try await retrieveBookmarked()
+        return articles.map { article in
+            Article(
+                article,
+                isBookmarked: saved.contains {
+                    article.id == $0
+                }
+            )
         }
+    }
+    
+    func bookmark(_ article: Article) async throws {
+        var saved = try await retrieveBookmarked()
+        saved.insert(article.id)
         
-        let bookmarked = Articles(saved)
-        try? await storage.save([bookmarkKey: bookmarked])
-        return Articles(saved)
+        try await storage.save([String](saved))
+    }
+        
+    func undoBookmark(_ article: Article) async throws {
+        var saved = try await retrieveBookmarked()
+        saved.remove(article.id)
+        
+        try await storage.save([String](saved))
+    }
+    
+    private func retrieveBookmarked() async throws -> Set<String> {
+        return Set(
+            (try? await storage.retrieveData()) ?? []
+        )
     }
 }

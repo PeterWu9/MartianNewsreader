@@ -12,15 +12,8 @@ import Foundation
 final class ArticleSource: ObservableObject {
         
     @Published private(set) var articles: Articles = []
-    @Published private(set) var bookmarkedArticles: Articles = []
     @Published private(set) var loadingState: LoadingState = .isLoading
     
-    private var bookmarkedStorage: Set<Article> = [] {
-        didSet {
-            bookmarkedArticles = Articles(bookmarkedStorage)
-        }
-    }
-
     private let readerService = ProofReaderService()
     private let articleService = ArticleService<StorageService>(baseUrlString: "https://s1.nyt.com/ios-newsreader/candidates/test/articles.json")
     
@@ -46,7 +39,8 @@ final class ArticleSource: ObservableObject {
                         try await Article(
                             title: article.title,
                             images: article.images,
-                            body: self.readerService.proofRead(article)
+                            body: self.readerService.proofRead(article),
+                            isBookmarked: article.isBookmarked
                         )
                     }
                 }
@@ -61,12 +55,6 @@ final class ArticleSource: ObservableObject {
             throw error
         }
     }
-    
-    func fetchBookmarkedArticles() async throws {
-        bookmarkedStorage = Set(
-            try await articleService.loadBookmarkedArticles()
-        )
-    }
 }
 
 enum ArticleSourceError: Error, LocalizedError {
@@ -75,13 +63,16 @@ enum ArticleSourceError: Error, LocalizedError {
 
 // MARK: Bookmarks
 extension ArticleSource {
-    func isBookmarked(for article: Article) -> Bool {
-        bookmarkedStorage.contains(article)
-    }
     
-    func bookmarkButtonTapped(on article: Article) async throws {
-        let bookmarked = await articleService.bookmark(article, save: !isBookmarked(for: article))
-        bookmarkedStorage = Set(bookmarked)
+    func bookmarkTapped(on article: Article) async throws {
+        
+        if let index = articles.firstIndex(of: article) {
+            try await article.isBookmarked
+            ? articleService.undoBookmark(article)
+            : articleService.bookmark(article)
+            
+            articles[index].isBookmarked.toggle()
+        }
     }
 }
 
