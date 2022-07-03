@@ -10,7 +10,7 @@ import Foundation
 // MARK: ViewModel
 @MainActor
 final class ArticleSource: ObservableObject {
-    
+        
     @Published private(set) var articles: Articles = []
     @Published private(set) var bookmarkedArticles: Articles = []
     @Published private(set) var loadingState: LoadingState = .isLoading
@@ -36,12 +36,11 @@ final class ArticleSource: ObservableObject {
         do {
             loadingState = .isLoading
             
-            async let bookmarked = articleService.loadBookmarkedArticles()
+            let fetchedArticles = try await articleService.fetchArticles()
             
-            async let fetchedArticles: Articles = withThrowingTaskGroup(of: Article.self) { group in
-                let articles = try await articleService.fetchArticles()
+            articles = try await withThrowingTaskGroup(of: Article.self) { group in
                 
-                for article in articles {
+                for article in fetchedArticles {
                     group.addTask {
                         // Allows strong self capture because self won't outlive the scope of throwing task group closure
                         try await Article(
@@ -57,15 +56,17 @@ final class ArticleSource: ObservableObject {
                 }
                 
             }
-            
-            articles = try await fetchedArticles
-            bookmarkedStorage = Set(try await bookmarked)
-            
             loadingState = .completeLoading
         } catch {
             loadingState = .hasLoadingError(error)
             throw error
         }
+    }
+    
+    func fetchBookmarkedArticles() async throws {
+        bookmarkedStorage = Set(
+            try await articleService.loadBookmarkedArticles()
+        )
     }
 }
 

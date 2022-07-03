@@ -10,7 +10,6 @@ import SwiftUI
 struct ArticleView: View {
     
     let article: Article
-    @State private var isShowingError = false
     @EnvironmentObject var source: ArticleSource
     
     private enum Constant {
@@ -38,23 +37,13 @@ struct ArticleView: View {
                     Text(article.body)
                 }
                 .padding([.leading, .trailing])
-                .confirmationDialog("Error", isPresented: $isShowingError) {
-                    Text("Sorry - we ran into issue while saving/unsaving bookmark")
-                    Button("Ok") {
-                        isShowingError = false
-                    }
-                }
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
                         // If bookmark operation does not succeed, user will know because the button image won't change
                         Task {
-                            do {
-                                try await source.bookmarkButtonTapped(on: article)
-                            } catch {
-                                isShowingError = true
-                            }
+                            try await source.bookmarkButtonTapped(on: article)
                         }
                     } label: {
                         Image(systemName: source.isBookmarked(for: article) ? "bookmark.fill" : "bookmark")
