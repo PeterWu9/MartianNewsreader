@@ -10,6 +10,64 @@ import Foundation
 /// Namespace for string parsing functions that checks a string for basic paragraph and sentence rules in the format of an article
 public final class ProofRead {
     
+    public static func translateToMartian(for string: String) -> String {
+        // Assumption:  The article has no missing carriage return characters.  All paragraph spacing is strictly "\n\n".
+        // Separate article into paragraphs
+        let paragraphs = string.components(separatedBy: String.paragraph)
+        
+        for paragraph in paragraphs {
+            let words = paragraph.components(separatedBy: String.space)
+            
+            var newParagraph = [String]()
+            
+            for word in words {
+                var startIndex: String.Index?
+                var endIndex: String.Index?
+                
+                let punctuationPrefix = word.prefix { character in
+                    character.isPunctuation
+                }
+                
+                if
+                    let punctuationPrefixLastChar = punctuationPrefix.last,
+                    let punctuationPrefixEndIndex = word.firstIndex(of: punctuationPrefixLastChar) {
+                    startIndex = word.index(after: punctuationPrefixEndIndex)
+                }
+                
+                let punctuationSuffix = word.reversed().prefix { character in
+                    character.isPunctuation
+                }
+                if
+                    let punctuationSuffixLastChar = punctuationSuffix.last,
+                    let punctuationSuffixEndIndex = word.firstIndex(of: punctuationSuffixLastChar) {
+                    endIndex = word.index(before: punctuationSuffixEndIndex)
+                }
+                
+                let wordWithoutPunctuationOnEnds = String(word[
+                    (startIndex ?? word.startIndex)...(endIndex ?? word.index(before: word.endIndex))
+                ])
+                
+                if wordWithoutPunctuationOnEnds.isNumbers {
+                    newParagraph = [newParagraph, wordWithoutPunctuationOnEnds].joined(separator: String.space)
+                    newParagraph.append(wordWithoutPunctuationOnEnds)
+                } else {
+                    if wordWithoutPunctuationOnEnds.isGreaterThanThreeCharacters {
+                        // Translate to Martian
+                        if wordWithoutPunctuationOnEnds.isCapitalized {
+                            // "Boinga"
+                            newParagraph.append("Boinga")
+                        } else {
+                            // "boinga"
+                            newParagraph.append("boinga")
+                        }
+                    }
+                }
+                
+            }
+        }
+        return ""
+    }
+    
     /// This function checks and fixes a string to make sure the paragraphs and sentences are separated by the proper characters/string.  This function only works when the input string is composed of paragraphs separated by two carriage characters, and each sentence, with the exception of a title sentence, is terminated by a period or quotation mark.
     public static func checkParagraphAndSentenceFragment(for string: String) -> String {
         

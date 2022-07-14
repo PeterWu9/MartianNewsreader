@@ -18,4 +18,23 @@ extension String {
     var terminatedWithPeriod: Self {
         self + .period
     }
+    
+    var isGreaterThanThreeCharacters: Bool {
+        count > 3
+    }
+     
+    var isNumbers: Bool {
+        let numberSet = CharacterSet.decimalDigits.union(CharacterSet.symbols)
+        for scalar in self.unicodeScalars {
+            if !numberSet.contains(scalar) {
+                return false
+            }
+        }
+        return true
+    }
+    
+    // Only relevant if I'm translating to Martian
+    var isCapitalized: Bool {
+        first?.isUppercase ?? false
+    }
 }
