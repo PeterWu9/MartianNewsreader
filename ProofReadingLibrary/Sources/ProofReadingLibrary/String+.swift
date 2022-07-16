@@ -24,7 +24,7 @@ extension String {
     }
      
     var isNumbers: Bool {
-        let numberSet = CharacterSet.decimalDigits.union(CharacterSet.symbols)
+        let numberSet = CharacterSet.decimalDigits.union(CharacterSet.symbols).union(CharacterSet.punctuationCharacters)
         for scalar in self.unicodeScalars {
             if !numberSet.contains(scalar) {
                 return false

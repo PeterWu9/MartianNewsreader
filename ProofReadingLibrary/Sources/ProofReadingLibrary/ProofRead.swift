@@ -15,10 +15,12 @@ public final class ProofRead {
         // Separate article into paragraphs
         let paragraphs = string.components(separatedBy: String.paragraph)
         
+        var newParagraphs = [String]()
+        
         for paragraph in paragraphs {
             let words = paragraph.components(separatedBy: String.space)
             
-            var newParagraph = [String]()
+            var newParagraph = String()
             
             for word in words {
                 var startIndex: String.Index?
@@ -47,25 +49,25 @@ public final class ProofRead {
                     (startIndex ?? word.startIndex)...(endIndex ?? word.index(before: word.endIndex))
                 ])
                 
-                if wordWithoutPunctuationOnEnds.isNumbers {
-                    newParagraph = [newParagraph, wordWithoutPunctuationOnEnds].joined(separator: String.space)
-                    newParagraph.append(wordWithoutPunctuationOnEnds)
-                } else {
-                    if wordWithoutPunctuationOnEnds.isGreaterThanThreeCharacters {
-                        // Translate to Martian
-                        if wordWithoutPunctuationOnEnds.isCapitalized {
-                            // "Boinga"
-                            newParagraph.append("Boinga")
-                        } else {
-                            // "boinga"
-                            newParagraph.append("boinga")
-                        }
-                    }
-                }
+                let martian = String(punctuationPrefix + "boinga" + punctuationSuffix)
+                let martianCapitalized = String(punctuationPrefix + "Boinga" + punctuationSuffix)
                 
+                if
+                    !wordWithoutPunctuationOnEnds.isNumbers,
+                    wordWithoutPunctuationOnEnds.isGreaterThanThreeCharacters {
+                    // Translate to Martian
+                    newParagraph = [newParagraph, wordWithoutPunctuationOnEnds.isCapitalized ? martianCapitalized : martian].joined(separator: newParagraph.isEmpty ? "" : .space)
+                } else {
+                    newParagraph = newParagraph.isEmpty
+                    ? newParagraph.appending(word)
+                    : [newParagraph, word].joined(separator: .space)
+                }
             }
+            
+            newParagraphs.append(newParagraph)
         }
-        return ""
+        
+        return newParagraphs.joined(separator: .paragraph)
     }
     
     /// This function checks and fixes a string to make sure the paragraphs and sentences are separated by the proper characters/string.  This function only works when the input string is composed of paragraphs separated by two carriage characters, and each sentence, with the exception of a title sentence, is terminated by a period or quotation mark.
